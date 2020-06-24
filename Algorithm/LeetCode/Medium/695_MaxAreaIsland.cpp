@@ -19,10 +19,12 @@ Note that
         }
 
 it will repeated add node when calculate area, e.g.
-[[1,1,0,0,0],
+[
+[1,1,0,0,0],
 [1,1,0,0,0],
 [0,0,0,1,1],
-[0,0,0,1,1]]
+[0,0,0,1,1]
+]
 
 
 (1,1) = 1 will be add by both (0,1) and (1,0,), thus, need another check for visited node.
