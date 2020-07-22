@@ -45,7 +45,7 @@ class NQueen:
     def solveNQueens(self, n):
         # write your code here
         result = []  
-        self.dfs(n, [], [], result)
+        self.dfs(n, [], result)
         return result
 
     """
@@ -61,7 +61,7 @@ class NQueen:
 
     """
         
-    def dfs(self, n, permutation, queens, result):
+    def dfs(self, n, permutation, result):
         if n == len(permutation):
             result.append(self.make_board(permutation))
             return
@@ -70,14 +70,13 @@ class NQueen:
         for col in range(n):
             #print("size = {}, row = {}, col = {}, and valid {}".format(len(permutation), row, col,self.isValid(col, row, queens)))
             #print("Queens: {}\r\n".format(queens))
-            if not self.isValid(col, row, queens):
+            if not self.isValid(col, row, permutation):
                 continue
             
             permutation.append(col)
-            queens.append(col)  #mark visited
-            self.dfs(n, permutation, queens, result)
+            self.dfs(n, permutation, result)
             permutation.pop()
-            queens.pop()  #mark visited           
+         
             
             
         
@@ -96,9 +95,10 @@ class NQueen:
         board = []
         n = len(permutation)
         for i in range(n):
+            col = permutation[i]
             row_str = ''
             for j in range(n):
-                col = permutation[i]
+
                 if j == col:
                     row_str += 'Q'
                 else:
