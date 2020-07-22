@@ -42,7 +42,7 @@ public:
             ++counter[n];
         }
         
-        for(map<int,int>::iterator it =counter.begin(); it!=counter.end(); ++it){
+        for(map<int,int>::iterator it = counter.begin(); it != counter.end(); ++it){
             if(it->second == 1){
                 return it->first;
             }
