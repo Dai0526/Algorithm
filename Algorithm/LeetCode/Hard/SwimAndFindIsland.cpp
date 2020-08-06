@@ -1,26 +1,15 @@
 /*
-Description:
-N * N board
-'.' -> sea
-'*' -> island
-
-Start from (0, 0), you can swim all 8 directions, once find a island, you can walk freely on island, and mark
-it as '+'.
-
-If you can only swim k steps, return a board and mark all reachable island to '+'
-
-Exmaple interface:
-
-MarkAllIsland(vector<vector<char>> board, int k);
-
-
 IDEA: Recursive + Bredth First Search
+
 Start swim from (0,0), do bfs for k steps
     if found a island, then bfs to mark all connected island
                             add all surround water to a list
                             for each surround water, do a bfs swim
 
 */
+
+#include <fstream>
+#include <string>
 
 #include <iostream>
 #include <vector>
@@ -34,14 +23,7 @@ void Swim(vector<vector<char>>& board, int r, int c, int k);
 void PrintBoard(vector<vector<char>>& board, int r, int c);
 
 // Direction lists
-vector<pair<int, int>> DIRS{  { 0, 1 }
-                            , { 0, -1 }
-                            , { 1, 0 }
-                            , { -1, 0 }
-                            , { 1, 1 }
-                            , { 1, -1 }
-                            , { -1, 1 }
-                            , { -1, -1 } }; // 8-directions
+vector<pair<int, int>> DIRS{ { 0, 1 },{ 0, -1 },{ 1, 0 },{ -1, 0 },{ 1, 1 },{ 1, -1 },{ -1, 1 },{ -1, -1 } }; // 4-directions
 
 // validation for boundry check
 bool InBoard(vector<vector<char>>& board, int c, int r) {
@@ -115,9 +97,10 @@ void Swim(vector<vector<char>>& board, int r, int c, int k) {
                 visited.insert(next);
             }
 
-            ++nStep;
-        }
+        }//for each step
+        ++nStep;
     }
+
 }
 
 // BFS - mark all connected island
@@ -152,7 +135,7 @@ void MarkIsland(vector<vector<char>>& board, int c, int r, int k) {
 
             pair<int, int> next(nextC, nextR);
 
-            if (!InBoard(board, nextC, nextR) || visited.find(next) != visited.end() || board[nextR][nextC]=='+') {
+            if (!InBoard(board, nextC, nextR) || visited.find(next) != visited.end() || board[nextR][nextC] == '+') {
                 continue;
             }
 
@@ -164,7 +147,7 @@ void MarkIsland(vector<vector<char>>& board, int c, int r, int k) {
                 board[nextR][nextC] = '+';
                 q.push(next);
                 visited.insert(next);
-                PrintBoard(board, 6, 6);
+                PrintBoard(board, row, col);
             }
         }
     }
@@ -202,18 +185,36 @@ int main() {
         when k = 2, it shall mark all island to +
     */
 
-    int r = 6;
-    int c = 6;
+    //int r = 6;
+    //int c = 6;
 
-    vector<vector<char>> board(r, vector<char>(c, '.'));
-    board[1][1] = '*';
-    board[1][2] = '*';
-    board[4][4] = '*';
-    board[4][5] = '*';
+    //vector<vector<char>> board(r, vector<char>(c, '.'));
+    //board[1][1] = '*';
+    //board[1][2] = '*';
+    //board[4][4] = '*';
+    //board[4][5] = '*';
 
-    PrintBoard(board, r, c);
+    ifstream in(".\\Island.txt");
+    string line;
+    int col = 0;
+    int row = 0;
+    vector<vector<char>> board;
+    while (getline(in, line)) {
+        ++row;
+        col = 0;
+        vector<char> temp;
+        for (char c : line) {
+            temp.push_back(c);
+            ++col;
+        }
+        
+        board.push_back(temp);
+    }
+
+    PrintBoard(board, row, col);
   
-    int k = 1;
+    int k =7;
     Swim(board, 0, 0, k);
+    PrintBoard(board, row, col);
     return 0;
 }
