@@ -34,7 +34,14 @@ void Swim(vector<vector<char>>& board, int r, int c, int k);
 void PrintBoard(vector<vector<char>>& board, int r, int c);
 
 // Direction lists
-vector<pair<int, int>> DIRS{ { 0, 1 },{ 0, -1 },{ 1, 0 },{ -1, 0 },{ 1, 1 },{ 1, -1 },{ -1, -1 },{ -1, -1 } }; // 4-directions
+vector<pair<int, int>> DIRS{  { 0, 1 }
+                            , { 0, -1 }
+                            , { 1, 0 }
+                            , { -1, 0 }
+                            , { 1, 1 }
+                            , { 1, -1 }
+                            , { -1, 1 }
+                            , { -1, -1 } }; // 8-directions
 
 // validation for boundry check
 bool InBoard(vector<vector<char>>& board, int c, int r) {
@@ -107,11 +114,10 @@ void Swim(vector<vector<char>>& board, int r, int c, int k) {
                 q.push(next);
                 visited.insert(next);
             }
-            ++nStep;
 
+            ++nStep;
         }
     }
-
 }
 
 // BFS - mark all connected island
@@ -146,7 +152,7 @@ void MarkIsland(vector<vector<char>>& board, int c, int r, int k) {
 
             pair<int, int> next(nextC, nextR);
 
-            if (!InBoard(board, nextC, nextR) || visited.find(next) != visited.end()) {
+            if (!InBoard(board, nextC, nextR) || visited.find(next) != visited.end() || board[nextR][nextC]=='+') {
                 continue;
             }
 
