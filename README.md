@@ -1,2 +1,1 @@
-# CodingInterview
- 
+# Algorithm Program for Fun
