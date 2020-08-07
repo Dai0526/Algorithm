@@ -28,4 +28,21 @@ public:
         
         return ans;
     }
+
+    vector<int> findDuplicates_space(vector<int>& nums) {
+        map<int, int> numMap;
+        
+        vector<int> ans;
+        
+        for(int n : nums){
+            ++numMap[n];
+            if(numMap[n] == 2){
+                ans.push_back(n);
+            }
+            
+        }
+        
+        // or use another loop to find count == 2
+        return ans;   
+    }
 };
