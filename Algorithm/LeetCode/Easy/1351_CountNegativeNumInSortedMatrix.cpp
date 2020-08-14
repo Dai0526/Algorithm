@@ -7,6 +7,8 @@ if negative, count += nRow - idx, then move left
 if positive, go down
 
 */
+#include <vector>
+using namespace std;
 
 class Solution {
 public:
