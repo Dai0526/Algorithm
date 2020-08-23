@@ -5,7 +5,7 @@ https://leetcode.com/problems/ads-performance/
 A company is running Ads and wants to calculate the performance of each Ad.
 Performance of the Ad is measured using Click-Through Rate (CTR) where:
 
-Write an SQL query to find the ctr of each Ad.
+Write an SQL query to find the ctr of each Ad.g
 Round ctr to 2 decimal points. Order the result table by ctr in descending order and by ad_id in ascending order in case of a tie.
 
 The query result format is in the following example:
