@@ -20,13 +20,13 @@ public:
             m_window.push(val);
         }
         
-        return m_sum * 1.0 / m_window.size();
+        return m_sum / m_window.size();
     }
     
 private:
     
     queue<int> m_window;
-    int m_sum;
+    double m_sum;
     int m_windowSize;
 };
 
