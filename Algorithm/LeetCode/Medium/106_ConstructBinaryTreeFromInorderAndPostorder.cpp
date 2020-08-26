@@ -29,8 +29,19 @@ left [post_strt, post_strt + (k - 1 - in_start)],
 right [post_end - 1 - (in_end - i - 1), post_end - 1]
 
 */
-
+#include <vector>
+using namespace std;
 class Solution {
+
+struct TreeNode {
+      int val;
+      TreeNode *left;
+      TreeNode *right;
+      TreeNode() : val(0), left(nullptr), right(nullptr) {}
+      TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+      TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
 public:
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
         return dfs(inorder, postorder, 0, inorder.size() - 1, 0, postorder.size() - 1);
@@ -43,7 +54,7 @@ public:
         
         int rootVal = postorder[postr];
         TreeNode* root = new TreeNode(rootVal);
-        cout << "root Val " << rootVal <<endl;
+        //cout << "root Val " << rootVal <<endl;
         int inRootIdx = getIdx(inorder, rootVal);
         
         root->left = dfs(inorder, postorder, inl, inRootIdx - 1, postl, postl + inRootIdx - inl - 1);
