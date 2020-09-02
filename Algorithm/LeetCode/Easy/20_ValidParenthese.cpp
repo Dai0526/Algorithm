@@ -8,6 +8,7 @@ if there is a right, check stack top
 */
 
 #include <stack>
+#include <iostream>
 #include <unordered_map>
 using namespace std;
 
