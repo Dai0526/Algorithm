@@ -8,6 +8,10 @@ dp[i] = min{dp[i – j * j] + 1} 1 <= j * j <= i
 
 也可以用数学方式求解，一个数最多有4个平方和
 */
+#include <vector>
+#include <algorithm>
+
+using namespace std;
 
 class Solution {
 public:
