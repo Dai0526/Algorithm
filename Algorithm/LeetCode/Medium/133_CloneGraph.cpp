@@ -38,6 +38,32 @@ public:
 
 class Solution {
 public:
+
+    Node* cloneGraph_DFS(Node* node) {      
+        map<int, Node*> graph;       
+        return dfs(node, graph);     
+    }
+    
+    Node* dfs(Node* node, map<int, Node*>& graph){
+        if(node == nullptr){
+            return nullptr;
+        }
+        
+        if(graph.find(node->val) != graph.end()){
+            return graph[node->val];
+        }
+        
+        Node* temp = new Node(node->val);
+        graph[temp->val] = temp;
+        
+        for(Node* nbh : node->neighbors){
+            Node* clone = dfs(nbh, graph);
+            temp->neighbors.push_back(clone);
+        }
+        
+        return temp;
+    }
+
     Node* cloneGraph(Node* node) {
         if(node == nullptr){
             return nullptr;
