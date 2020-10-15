@@ -55,12 +55,10 @@ public:
             while(b < c){
                 if(S[b] + S[c] > S[a]){
                     count += (c - b);
-                    --c;
-                    
+                    --c;                    
                 }else{
                     ++b;                    
-                }
-  
+                }  
             }
         }
 

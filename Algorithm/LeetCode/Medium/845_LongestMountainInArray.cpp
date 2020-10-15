@@ -3,7 +3,9 @@ https://leetcode.com/problems/longest-mountain-in-array/
 
 */
 #include <vector>
+#include <algorithm>
 using namespace std;
+
 class Solution {
 public:
     int longestMountain(vector<int>& A) {

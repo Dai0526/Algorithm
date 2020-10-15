@@ -71,11 +71,9 @@ public:
                 swap(nums[right], nums[idx]);
                 --right;
             }
-        }
-        
+        }   
     }
-    
-    
+        
     void swap(int& idx1, int& idx2){
         int temp = idx1;
         idx1 = idx2;
