@@ -1,3 +1,12 @@
+/*
+Think about the bitwise shift operation
+
+x & (x - 1) == 0 ?
+x & (-x) ==  x
+
+
+*/
+
 class Solution {
 public:
     bool isPowerOfTwo(int n) {
