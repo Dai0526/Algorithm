@@ -48,4 +48,59 @@ public:
         
         return stk.empty() == true ? true : false;
     }
+
+public:
+    
+    enum ParentheseType{
+        NONE = 0,
+        LEFT = 1,
+        RIGHT = 2
+    };
+    
+    bool isValid2(string s) {
+        
+        unordered_map<char, char> parenthesesPair;
+        parenthesesPair[')'] = '(';
+        parenthesesPair[']'] = '[';
+        parenthesesPair['}'] = '{';
+        
+        stack<char> stk;
+        
+        for(char c : s){
+            ParentheseType t = GetPrentheseType(c);
+            switch(t){
+                case ParentheseType::LEFT:
+                    stk.push(c);
+                    break;
+                case ParentheseType::RIGHT:
+                    if(stk.empty()){
+                        return false;
+                    }
+                
+                    if(parenthesesPair[c] != stk.top()){
+                        return false;
+                    }
+                    stk.pop();
+                    break;
+                default:
+                    break; 
+            }
+            
+        }
+        
+        return stk.empty();
+    }
+    
+    ParentheseType GetPrentheseType(char c){
+        if(c == '[' || c == '(' || c == '{'){
+            return ParentheseType::LEFT;
+        }else if(c == ']' || c == ')' || c == '}'){
+            return ParentheseType::RIGHT;
+        }
+         
+        return ParentheseType::NONE;
+    } 
+    
 };
+
+
