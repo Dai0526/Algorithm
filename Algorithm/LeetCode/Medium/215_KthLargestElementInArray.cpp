@@ -24,6 +24,7 @@ public:
     }
     
 private:
+
     int quickSelect(vector<int>& nums, int left, int right, int k){
         if(left == right){
             return nums[left];
