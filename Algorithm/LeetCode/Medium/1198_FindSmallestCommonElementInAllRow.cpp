@@ -41,3 +41,34 @@ public:
         return false;
     }
 };
+
+class Solution2 {
+public:
+    int smallestCommonElement(vector<vector<int>>& mat) {
+        int row = mat.size();
+        if(row < 1){
+            return -1;
+        }
+        
+        int col = mat[0].size();
+        if(col < 1){
+            return -1;
+        }
+        
+        unordered_map<int, int> count;
+        
+        for(int i = 0; i < row; ++i){
+            for(int j = 0; j < col; ++j){
+                int val = mat[i][j];
+                ++count[val];
+                
+                if(count[val] == row){
+                    return val;
+                }
+                
+            }
+        }
+
+        return -1;
+    }
+};
