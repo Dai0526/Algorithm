@@ -8,6 +8,25 @@ using namespace std;
 
 class Solution {
 public:
+
+    vector<int> advantageCount(vector<int>& A, vector<int>& B) {
+        
+        int n = B.size();
+        vector<int> ans(n, -1);
+        multiset<int> s(A.begin(), A.end());
+        for(int i = 0; i < B.size(); ++i){
+            multiset<int>::iterator it = s.upper_bound(B[i]);
+            if(it == s.end()){
+                it = s.begin();
+            }
+            
+            ans[i] = *it;
+            s.erase(it);
+        }
+        
+        return ans;
+    }
+
     vector<int> advantageCount(vector<int>& A, vector<int>& B) {
         
         vector<int> temp(A.begin(), A.end());
