@@ -101,4 +101,5 @@ test = Solution()
 string = "lintcode"
 dictword = ["de","ding","co","code","lint"]
 #Output：["lint code", "lint co de"]    
-test.wordBreak(string, dictword)
+ans = test.wordBreak(string, dictword)
+print(ans)
