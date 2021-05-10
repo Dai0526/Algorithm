@@ -1,3 +1,10 @@
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
 class WordDistance {
 public:
     
@@ -32,16 +39,13 @@ public:
             }else{
                 ++ptr2;
             }
-        }
-        
+        }    
         return minDiff;
     }
-    
-    
-private:
-    
+        
+private:    
     unordered_map<string, vector<int>> m_record;
-    
+
 };
 
 /**
