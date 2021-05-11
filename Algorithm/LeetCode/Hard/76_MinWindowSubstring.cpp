@@ -9,7 +9,6 @@ Sliding window
 
 using namespace std;
 
-
 class Solution {
 public:
     string minWindow(string s, string t) {
@@ -35,6 +34,8 @@ public:
         int numTarget = target.size();
         int num = 0;
         
+        cout << "target size = " << numTarget << ", tLen = " << tLen << endl;
+        
         // min window rec
         int start = 0;
         int end = numeric_limits<int>::max();
@@ -51,6 +52,7 @@ public:
                 }   
                 
                 while(num == numTarget && left <= right){
+                    // update if min window found
                     if(right - left < end - start){
                         end = right;
                         start = left;
@@ -59,16 +61,12 @@ public:
                     if(target.find(s[left]) != target.end()){
                         if(target[s[left]] == source[s[left]]){
                             --num;
-                        }
-                        
+                        }             
                         --source[s[left]];
-                    }
-                    
-                    ++left;
-                }
-                
-            }    
-            
+                    }       
+                    ++left;    // move left to shrink window
+                }             
+            }       
             ++right;
         }
         
