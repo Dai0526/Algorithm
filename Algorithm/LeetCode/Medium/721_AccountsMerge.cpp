@@ -26,8 +26,7 @@ public:
                 email2Name[email] = user;
             }
         }
-        
-        
+          
         unordered_set<string> recorded; 
         vector<vector<string>> merged;
         
