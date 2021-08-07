@@ -1,6 +1,17 @@
 /*
 https://leetcode.com/problems/daily-temperatures/
 
+a. use a stack to record the cloest higher days index
+b. start from back
+
+1. while current value great than stack top
+        keep pop until current value less than stack top
+2. if stack empty, mean current is the hotest
+        set days to 0
+   else
+        compute days = stack top idx - current idx
+3. push current idx to stacktop
+
 */
 
 #include <vector>
