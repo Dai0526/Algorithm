@@ -1,0 +1,31 @@
+HW7
+
+Problem 1
+Create a graph. If an actor or actress has direct connection with Kevin Bacon,
+add an edge with weight 1, and direction is from this actor to KB. If an actor 
+or actress has no direct connection with KB, then connect it with other actors
+ and set the edge with weight 1 and direction from this actor to the other one.
+
+a) If we want to find the Bacon number, we just get the shortest path from 
+this actor to KB.
+
+b) loop over the graph, and get the Bacon number for each pair, store the max one
+and return it at last.
+
+
+c) 
+Since all the weight of edges are 1, we can run a Breadth First Search for 
+this graph between this two actors.
+
+
+
+
+Problem 2
+
+a) For a general map, if a map has cycle, it will repeated the cycle and the recursion will never stop (infinite loop).
+
+
+b) Because a acyclic graph doesn't have cycle, so it will always make progress and reach the base case in the end.
+
+
+c) The worst case is go through all the nodes and the run time is big-O(N).

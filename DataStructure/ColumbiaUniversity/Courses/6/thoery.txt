@@ -1,0 +1,47 @@
+Part1-Theory
+
+Problem 1
+
+AC -2
+DG -2
+DE -3
+FH -5
+CF -7
+CD -7
+FG -8
+BE -8
+CG -9
+BD -10
+Show the forest maintained after each step:
+AC
+AC DG
+AC DG DE
+AC DG DE FH
+AC DG DE FH CF
+AC DG DE FH CF FG
+AC DG DE FH CF FG BE
+
+
+
+Problem 2
+
+ A --10--C
+  \       \ -9
+  1\       \     
+    B --3-- D --2--E
+ By  Dijkstra's algorithm, it will go
+
+A-B-D-E, and the cose will be 5
+but the shortest path is A-C-D-E which the cost is 3
+
+
+Problem 3  
+We can set two marks to vertex, every time we pass through one vertex,
+we label the next one with different mark, when there is a contridiction
+of the marks on a single vertex, it means the graph is not a bipartite.
+
+1.get the node, mark this node with label (V1)
+2.check all the nodes connected to it, and mark them (V2)
+3.go through nodes marked as (V2), checek all the nodes connected to them, and mark (V1)
+repeate step 1-3, until there is a mark contridiction.  
+

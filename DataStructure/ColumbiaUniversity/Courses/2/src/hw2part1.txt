@@ -1,0 +1,55 @@
+Problem 1
+
+2^(n+1)>N!>(3^n=2^n)>42N³>N²>N log N>23N>log N>2/N>sqrt(N)>128
+
+Problem 2
+1. Big-O(n^2)=n^2
+
+2. Big-O(23n)=n
+
+3. Big-O= logk/logn
+
+Problem 3
+a). 
+Move the car at the front of the input track to the back of of the output track.
+Move the car at the front of the input track to the top of one of the holding tracks.
+Move the car at the top of one of the holding tracks to the back of the output track.
+
+Move 3 to S1
+Move 6 to S2
+Move 9 to S3
+Move 2 to S1
+Move 4 to S2
+Move 7 to S3
+Move 1 to S1
+Move 1 to output
+Move 2 to output
+Move 3 to output
+Move 8 to S1
+Move 5 to S1
+Move 4 to output
+Move 5 to output
+Move 6 to output
+Move 7 to output
+Move 8 to output
+Move 9 to output
+
+ 
+b). Yes, there is a solution for any train of length 9 with 3 holding tracks.
+Step 1: if all three stack are empty
+	Move the car at the front of the input track to one of the top of the empty holding tracks.
+
+Step 2: if the front of input smaller than top of HT1
+		put on top of HT 1
+   	else if the front of input smaller than top of HT2
+		put on top of HT 2 
+   	else if the front of input smaller than top of HT3
+		put on top of HT 3 
+   	else push the smallest top of the holding tracks to output track until one holding stack is empty(back to step 1) 
+   		or the front of input is smaller than one of the top of the holding tracks(to step 2).
+
+        if input stack is empty and all 3 holding stacks are empty
+		finish the rearranging.	
+		
+It works because it will always try to fill the empty stack in order to check if there is minimun #
+of train that can be arrange to the tracks.

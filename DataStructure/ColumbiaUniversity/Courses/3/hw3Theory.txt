@@ -1,0 +1,39 @@
+Data Structure HW3
+Theory Part
+
+Problem 1
+(a).
+	    3
+	2       7
+	     4        8
+	         5      9
+	    3
+	   / \
+	  2   7
+	     / \
+	    4   8
+	     \	 \	    
+     	      5   9
+This tree is not balanced.
+
+(b).
+
+	    4
+	   / \
+	  2   7
+	     / \
+	    5   8
+	     	 \	    
+     	         9
+
+Problem 2
+a)When we insert 9, need a single rotation.
+  When we insert 4, need a double rotation.
+
+            7
+	   / \
+	  3   8
+	 / \   \
+	2   4   9
+	     \	 	    
+     	      5   
