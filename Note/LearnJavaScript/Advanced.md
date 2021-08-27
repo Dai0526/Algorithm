@@ -230,3 +230,56 @@ function giveMeFunctions() {
 2: 4
 ```
 
+## Spread Operator and Rest Parameters
+**Spread** syntax allows an iterable such as an array expression or string to be expanded in places where zero or more arguments (for function calls) or elements (for array literals) are expected, or an object expression to be expanded in places where zero or more key-value pairs (for object literals) are expected.
+
+### Combine Array
+```
+const veggie = ["tomato","cucumber","beans"];
+const meat = ["pork","beef","chicken"];
+
+const menu = [...veggie, "pasta", ...meat];
+console.log(menu);
+// Array [ "tomato", "cucumber", "beans", "pasta", "pork", "beef", "chicken" ]
+```
+
+### Copy Array
+* var a `=` b
+  * `=` sign is just point to memory address, like `&` in C++.  
+* var a = [].concat(b)
+  * copy by creating a new array
+* var a = [...b]
+  * Spread to make a deep copy
+
+
+#### Spread into function
+```
+// OLD WAY
+function doStuff (x, y, z) {
+  console.log(x + y + z);
+ }
+var args = [0, 1, 2];
+
+// Call the function, passing args
+doStuff.apply(null, args);
+
+// USE THE SPREAD SYNTAX
+
+doStuff(...args);
+// 3 (0+1+2);
+console.log(args);
+// Array [ 0, 1, 2 ]
+```
+
+### Rest parameter
+The **rest** syntax looks exactly the same as the **spread**- 3 dots `...`. But it is quite the opposite of it. **Spread** expands an array, while **rest** condenses multiple elements into a single one.
+  
+```
+const runners = ["Tom", "Paul", "Mark", "Luke"];
+const [first,second,...losers] = runners;
+
+console.log(...losers);
+// Mark Luke
+```
+
+We stored the first two values inside the const first and second and whatever was left we put inside losers using the rest parameter.
