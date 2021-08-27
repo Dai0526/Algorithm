@@ -79,7 +79,26 @@ This object is very simple for it has only two methods, `stringify()` and `parse
     }
     ```
 Above code see .\Example\Advanced.js
-    
+
+### Remove Object Properties
+`delete` Keyword
+```
+var myObject = new Object();
+myObject.intProp = 23;
+myObject.strProp = "Hi!";
+
+console.log(myObject.intProp); // 23
+console.log(myObject.strProp); // Hi!
+
+delete myObject.intProp;
+
+console.log(myObject.intProp); // undefined
+console.log(myObject.strProp); // Hi!
+```
+
+### Modularity
+Check `OOP`
+
 ## Specifying Function
 ```
 var add = function (a, b) {
@@ -210,3 +229,4 @@ function giveMeFunctions() {
 1: 1
 2: 4
 ```
+
