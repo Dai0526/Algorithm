@@ -18,3 +18,14 @@ function onClick(evt) {
   relatedDiv.setAttribute("style",
     isCollapsed ? "" : "display: none");
 }
+
+// Write code here!
+var ul = document.createElement('ul');
+for(var i = 0; i < 9; ++i){
+    var li = document.createElement('li');
+    li.innerHTML = "list item #" + i + ".";
+    ul.appendChild(li);
+}
+
+var content = document.querySelector('body');
+content.appendChild(ul);
