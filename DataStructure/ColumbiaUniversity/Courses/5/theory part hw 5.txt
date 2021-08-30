@@ -1,0 +1,56 @@
+
+Part 1
+
+Problem 1
+[314, 512, 004, 999, 023, 042, 613, 109, 001, 123, 666]
+
+a. Insertion Sort
+[314, 512, 004, 999, 023, 042, 613, 109, 001, 123, 666]
+[004, 314, 512, 999, 023, 042, 613, 109, 001, 123, 666]
+[004, 023, 314, 512, 999, 042, 613, 109, 001, 123, 666]
+[004, 023, 042, 314, 512, 999, 613, 109, 001, 123, 666]
+[004, 023, 042, 314, 512, 613, 999, 109, 001, 123, 666]
+[004, 023, 042, 109, 314, 512, 613, 999, 001, 123, 666]
+[001, 004, 023, 042, 109, 314, 512, 613, 999, 123, 666]
+[001, 004, 023, 042, 109, 123, 314, 512, 613, 999, 666]
+[001, 004, 023, 042, 109, 123, 314, 512, 613, 666, 999]
+
+b. Quick Sort
+[042, 512, 004, 999, 023, 314, 613, 109, 001, 123, 666] 
+[042, 004, 023, 109, 001, 123] 314 [512, 999, 613, 666]
+            
+
+[023, 004] 042 [109, 001, 123]        [512,613] 666 [999]  
+[023,004,001] 042 [109,123]
+
+[001,004,023] 042 [109,123] 314 [512,613] 666 [999]
+
+[001, 004, 023, 042, 109, 123, 314, 512, 613, 666, 999]   
+
+c. Radix Sort        
+[001,512,042,023,613,123,314,004,666,999,109]
+[001,004,109,512,613,314,023,123,042,666,999]
+[001,004,023,042,109,123,314,512,613,666,999]
+
+Problem 2: Sorting Stability
+
+a). Some sorts will be unstable if the keys are the same. We can 
+modify the key by giving a number to each repeated key so that 
+there is an order between keys and the sorting method will be stable.
+
+b). 
+(4, a), (2, c), (3, d), (4, b), (1, e)
+after sort it will be 
+(1, e), (2, c), (3, d), (4, b), (4, a)
+where the sequence of (4,b) and (4,a) are different against the original sequence.
+
+
+
+Problem 3: Parallel MergeSort
+By the defination of mergeSort, it will divide the array by half,
+so each time the CPU need to deal with N/2+N/4+N/8+...+N/N
+The sum of the above equaiton is N.
+So the running time to sort an array of length N using Merge Sort 
+in this scenario is N.
+
+
