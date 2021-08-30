@@ -283,3 +283,36 @@ console.log(...losers);
 ```
 
 We stored the first two values inside the const first and second and whatever was left we put inside losers using the rest parameter.
+
+## Generator -> Iterator
+A generator function is a function that we can start and stop, for an indefinite amount of time. And also restart with the possibility of passing additional data at a later point in time.  
+
+In my opinion, it is an alternative of iterator. (iterator in Javascript requires customization)  
+
+**GENERATOR**  
+* we declared the function using `function*`
+* we used the keyword `yield` before our content
+* we start our function using `.next()`
+* the last time we call `.next()` we receive and empty object and we get done: true
+* Our function is paused between each `.next()` call.
+
+```
+// create an array of fruits
+const fruitList = ['Banana','Apple','Orange','Melon','Cherry','Mango'];
+
+// create our looping generator
+function* loop(arr) {
+  for (const item of arr) {
+    yield `I like to eat ${item}s`;
+  }
+}
+
+
+const fruitGenerator = loop(fruitList);
+console.log(fruitGenerator.next());
+// Object { value: "I like to eat Bananas", done: false }
+console.log(fruitGenerator.next());
+// Object { value: "I like to eat Apples", done: false }
+console.log(fruitGenerator.next().value);
+// "I like to eat Oranges"
+```
