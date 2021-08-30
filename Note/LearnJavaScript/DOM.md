@@ -231,3 +231,88 @@ button.onclick = function(){
     * onfocus: occurs when focus is placed on an `<input>` field
     * onchange: occurs when an `<input>`'s value is changed (useful for radio or checkbox type inputs)
     * oninput: occurs when a user provides input to an element (useful for text type inputs or `<textarea>` elements)
+
+
+## Modifying CSS
+
+### `Element.style`
+For example:  
+* Element.style.textAlign
+* Element.style.border
+* Fulllist here https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Properties_Reference
+
+
+```
+<html>
+ <head>
+   <title>Modifying CSS with Element.style</title>
+ </head>
+ <body>
+   <h1>This element should have a border.</h1>
+ </body>
+</html>
+
+var h1 = document.querySelector('h1');
+h1.style.border = "3px dashed black";
+```
+
+### Programmatically styling with classese using `Element.classList`
+```
+<html>
+ <head>
+   <title>Applying Multiple Styles</title>
+ </head>
+ <body>
+   <h1>Highlight this element on a click</h1>
+ </body>
+</html>
+
+var h1 = document.querySelector('h1');
+
+h1.onclick = function(){
+  this.style.color = 'white';
+  this.style.backgroundColor = 'blue';
+}
+
+```
+
+However, a better way to add multiple styles would be to create a class with those CSS properties and then add the class to the HTML element. We can use `Element.classList` to:
+
+* check the class values associated with an element
+* add/remove classes toggle class values
+* check whether a certain class is associated with an element
+* replace one class with another class
+
+```
+// HTML 
+<html>
+ <head>
+   <title>Applying Multiple Styles</title>
+ </head>
+ <body>
+   <h1>Highlight this element on a click</h1>
+ </body>
+</html>
+
+// CSS
+.highlight {
+  color: white;
+  background-color: blue;
+}
+
+
+// JS to apply css style class to an node or type
+var h1 = document.querySelector('h1');
+
+h1.onclick = function(){
+  this.classList.add('highlight');
+}
+
+// JS to remove css style class to an node or type
+var h1 = document.querySelector('h1');
+
+h1.onclick = function(){
+  this.classList.toggle('highlight');
+}
+
+```
