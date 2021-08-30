@@ -296,6 +296,29 @@ In my opinion, it is an alternative of iterator. (iterator in Javascript require
 * the last time we call `.next()` we receive and empty object and we get done: true
 * Our function is paused between each `.next()` call.
 
+General Example  
+```
+function* fruitList(){
+  yield 'Banana';
+  yield 'Apple';
+  yield 'Orange';
+}
+
+const fruits = fruitList();
+
+fruits;
+// Generator
+console.log(fruits.next());
+// Object { value: "Banana", done: false }
+console.log(fruits.next());
+// Object { value: "Apple", done: false }
+console.log(fruits.next());
+// Object { value: "Orange", done: false }
+console.log(fruits.next());
+// Object { value: undefined, done: true }
+```
+
+### Create generator for Array
 ```
 // create an array of fruits
 const fruitList = ['Banana','Apple','Orange','Melon','Cherry','Mango'];
@@ -316,3 +339,72 @@ console.log(fruitGenerator.next());
 console.log(fruitGenerator.next().value);
 // "I like to eat Oranges"
 ```
+
+### Finish Generator with Return
+```
+function* fruitList(){
+  yield 'Banana';
+  yield 'Apple';
+  yield 'Orange';
+}
+
+const fruits = fruitList();
+
+console.log(fruits.return());
+// Object { value: undefined, done: true }
+```
+
+### Catching Error with Throw()
+```
+function* gen(){
+  try {
+    yield "Trying...";
+    yield "Trying harder...";
+    yield "Trying even harder..";
+  }
+  catch(err) {
+    console.log("Error: " + err );
+  }
+}
+
+const myGenerator = gen();
+console.log(myGenerator.next());
+// Object { value: "Trying...", done: false }
+console.log(myGenerator.next());
+// Object { value: "Trying harder...", done: false }
+console.log(myGenerator.throw("ooops"));
+// Error: ooops
+// Object { value: undefined, done: true }
+```
+
+### Combine Generator with Promise
+
+Using a `generator` in combination with a `Promise` will allow us to write asynchronous code that feels like synchronous code.
+
+What we want to do is wait for a promise to resolve and then pass the resolved value back into our generator in the `.next()` call.
+
+```
+const myPromise = () => new Promise((resolve) => {
+  resolve("our value is...");
+});
+
+function* gen() {
+  let result = "";
+  // returns promise
+  yield myPromise().then(data => { result = data }) ;
+  // wait for the promise and use its value
+  yield result + ' 2';
+};
+
+// Call the async function and pass params
+const asyncFunc = gen(); 
+const val1 = asyncFunc.next();
+console.log(val1);
+// call the promise and wait for it to resolve
+// {value: Promise, done: false}
+val1.value.then(() => {
+  console.log(asyncFunc.next());
+})
+// Object { value: "our value is... 2", done: false }
+```
+The first time we call `.next()` at line 15 it will call our promise and wait for it to resolve (in our simple example it resolves immediately). And when we call `.next()` again at line 20 it will utilize the value returned by the promise to do something else (in this case just interpolate a string).
