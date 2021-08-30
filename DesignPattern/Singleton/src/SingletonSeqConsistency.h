@@ -1,12 +1,9 @@
 // singletonSequentialConsistency.cpp
 
 #include <atomic>
-#include <iostream>
 #include <future>
 #include <mutex>
-#include <thread>
 
-constexpr auto tenMill = 10000000;
 
 class SingletonSeqConsistency{
 public:
@@ -24,6 +21,7 @@ public:
     return sin;
   }
 private:
+
   SingletonSeqConsistency() = default;
   ~SingletonSeqConsistency() = default;
   SingletonSeqConsistency(const SingletonSeqConsistency&) = delete;
@@ -32,23 +30,3 @@ private:
   static std::atomic<SingletonSeqConsistency*> instance;
   static std::mutex myMutex;
 };
-
-
-std::atomic<SingletonSeqConsistency*> SingletonSeqConsistency::instance;
-std::mutex SingletonSeqConsistency::myMutex;
-
-int main(){
-    
-  constexpr auto fourtyMill = 4 * tenMill;
-  
-  const auto begin= std::chrono::system_clock::now();
-  
-  for ( size_t i = 0; i <= fourtyMill; ++i){
-    SingletonSeqConsistency::getInstance();
-  }
-  
-  const auto end = std::chrono::system_clock::now() - begin;
-  
-  std::cout << std::chrono::duration<double>(end).count() << std::endl;
-
-}

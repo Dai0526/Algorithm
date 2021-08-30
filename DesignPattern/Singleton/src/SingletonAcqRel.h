@@ -6,8 +6,6 @@
 #include <mutex>
 #include <thread>
 
-constexpr auto tenMill = 10000000;
-
 class SingletonAcqRel{
 public:
   static SingletonAcqRel* getInstance(){
@@ -34,20 +32,20 @@ private:
 };
 
 
-std::atomic<SingletonAcqRel*> SingletonAcqRel::instance;
-std::mutex SingletonAcqRel::myMutex;
+// std::atomic<SingletonAcqRel*> SingletonAcqRel::instance;
+// std::mutex SingletonAcqRel::myMutex;
 
-int main(){
+// int main(){
     
-  constexpr auto fourtyMill = 4 * tenMill;
+//   constexpr auto fourtyMill = 4 * tenMill;
   
-  const auto begin= std::chrono::system_clock::now();
+//   const auto begin= std::chrono::system_clock::now();
   
-  for ( size_t i = 0; i <= fourtyMill; ++i){
-    SingletonAcqRel::getInstance();
-  }
+//   for ( size_t i = 0; i <= fourtyMill; ++i){
+//     SingletonAcqRel::getInstance();
+//   }
   
-  const auto end = std::chrono::system_clock::now() - begin;
+//   const auto end = std::chrono::system_clock::now() - begin;
   
-  std::cout << std::chrono::duration<double>(end).count() << std::endl;
-}
+//   std::cout << std::chrono::duration<double>(end).count() << std::endl;
+// }
