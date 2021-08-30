@@ -1,10 +1,12 @@
 # Singleton C++ performance in Windows 10
+Create Singleton Instance for 40,000,000 times.
+
 |Singleton Type    |  Time Spent   |
 |:---              |---:           |
-| Lock Init        |    1.72336 sec|
-| Lock Double Check|  0.0887732 sec|
-| Classical 1      |  0.0777613 sec|
-| LockGuard        |    1.63736 sec|
-| CallOnce         |   0.324206 sec|
-| Seq Consistency  |   0.201078 sec|
-| Release Acquire  |   0.307426 sec|
+| [Lock Init](https://github.com/Dai0526/Algorithm/blob/master/DesignPattern/Singleton/src/SingletonLock.h)        |    1.72336 sec|
+| [Lock Double Check](https://github.com/Dai0526/Algorithm/blob/master/DesignPattern/Singleton/src/SingletonDoubleLock.h)|  0.0887732 sec|
+| [Classical 1](https://github.com/Dai0526/Algorithm/blob/master/DesignPattern/Singleton/src/SingletonClassical.h)      |  0.0777613 sec|
+| [LockGuard](https://github.com/Dai0526/Algorithm/blob/master/DesignPattern/Singleton/src/SingletonLockGuard.h)       |    1.63736 sec|
+| [CallOnce](https://github.com/Dai0526/Algorithm/blob/master/DesignPattern/Singleton/src/SingletonCallOnceSafe.h)        |   0.324206 sec|
+| [Seq Consistency](https://github.com/Dai0526/Algorithm/blob/master/DesignPattern/Singleton/src/SingletonSeqConsistency.h)  |   0.201078 sec|
+| [Release Acquire](https://github.com/Dai0526/Algorithm/blob/master/DesignPattern/Singleton/src/SingletonAcqRel.h)  |   0.307426 sec|
