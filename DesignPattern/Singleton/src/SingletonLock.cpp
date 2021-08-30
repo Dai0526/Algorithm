@@ -1,3 +1,9 @@
+/*
+Thread Safe singleton with lock
+
+*/
+
+
 #include <iostream>
 #include <mutex>
 #include <thread>
