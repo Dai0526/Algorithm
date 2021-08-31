@@ -23,7 +23,7 @@
 				"/EHsc",
 				"/nologo",
 				"/Fe:",
-				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"${fileDirname}\\..\\bin\\${fileBasenameNoExtension}.exe",
 				"${file}"
 			],
 			"options": {
