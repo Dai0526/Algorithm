@@ -1,10 +1,7 @@
 // singletonAcquireRelease.cpp
-
 #include <atomic>
-#include <iostream>
 #include <future>
 #include <mutex>
-#include <thread>
 
 class SingletonAcqRel{
 public:
