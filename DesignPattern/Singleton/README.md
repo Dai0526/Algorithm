@@ -14,7 +14,7 @@ Create Singleton Instance for 40,000,000 times.
 | [Release Acquire](https://github.com/Dai0526/Algorithm/blob/master/DesignPattern/Singleton/src/SingletonAcqRel.h)  |   0.307426 sec|
 
 
-# Windows 10 Ubuntu gcc
+## Windows 10 Ubuntu gcc
 
 |Singleton Type    |  Time Spent   |
 |:---              |---:           |
