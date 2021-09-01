@@ -20,7 +20,7 @@ document behaves like any other Javascript object, and has many different proper
 #### Modifying HTML elements
 ##### `obj.innerHTML` 
 It can change the display content of the obj.
-```
+```Javascript
 var h1 = document.querySelector('h1');
 h1.innerHTML = "We just modified HTML using Javascript!";
 ```
@@ -35,7 +35,7 @@ Element.outerHTML returns a string-like value that contains both the content of 
 https://developer.mozilla.org/en-US/docs/Web/API/Element
 
 ### `document.getElementById(id)`
-```
+```Javascript
 var mainHeading = document.getElementById('mainHeading');
 
 mainHeading.innerHTML = "Access an element with an id attribute using <code>document.getElementById()</code>";
@@ -44,7 +44,7 @@ mainHeading.innerHTML = "Access an element with an id attribute using <code>docu
 ### Multiple element nodes
 ### `document.querySelectorAll(selector)`
 
-```
+```Javascript
 var todoItems = document.querySelectorAll('#todos > li');
 
 for(var i = 0; i < todoItems.length; i++) {
@@ -53,7 +53,7 @@ for(var i = 0; i < todoItems.length; i++) {
 ```
 
 ### `document.getElementsByTagName`
-```
+```Javascript
 var headings = document.getElementsByTagName('h1');
 var paragraphs = document.getElementsByTagName('p');
 
@@ -74,7 +74,7 @@ Create an DOM object.
 ### `Element.appendChild(element_node)`
 Add the object to html DOM tree
 
-```
+```Javascript
 <html>
  <head>
    <title>Creating New Elements</title>
@@ -95,7 +95,7 @@ content.appendChild(h1);
 ```
 
 ### `Element.removeChild(element_node)`
-```
+```Javascript
 <html>
  <head>
    <title>Removing HTML Elements</title>
@@ -119,7 +119,7 @@ console.log(oldElement.innerHTML);
 ## Modifying Element Attribtues
 
 ### `Element.getAttributeNames()`
-```
+```Javascript
  </head>
  <body>
    <h1 id="logo">Learn DOM Manipulation with Javascript</h1>
@@ -147,7 +147,7 @@ console.log("input attributes:", input.getAttributeNames());
 
 ### `Element.getAttribute(name)`
 
-```
+```Javascript
  </head>
  <body>
    <h1 id="logo">Learn DOM Manipulation with Javascript</h1>
@@ -171,7 +171,7 @@ You can change the value of an attribute using the setAttribute() function. Addi
 
 ## Event Listeners
 
-```
+```Javascript
 <html>
  <head>
    <title>First Javascript Code</title>
@@ -197,7 +197,7 @@ button.onclick = function() {
 
 Since the button variable is an object, we can use the this keyword from within the object’s methods to access its properties:
 
-```
+```Javascript
 // random color generator 
 var randomColor = function(){
   var rvalue = function() {
@@ -242,7 +242,7 @@ For example:
 * Fulllist here https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Properties_Reference
 
 
-```
+```Javascript
 <html>
  <head>
    <title>Modifying CSS with Element.style</title>
@@ -257,7 +257,7 @@ h1.style.border = "3px dashed black";
 ```
 
 ### Programmatically styling with classese using `Element.classList`
-```
+```Javascript
 <html>
  <head>
    <title>Applying Multiple Styles</title>
@@ -283,7 +283,7 @@ However, a better way to add multiple styles would be to create a class with tho
 * check whether a certain class is associated with an element
 * replace one class with another class
 
-```
+```Javascript
 // HTML 
 <html>
  <head>

@@ -46,7 +46,7 @@ user_id = "string 12"   # string
 ### Object
 Can hold values and methods
 
-```
+``` Javascript
 const car = {
     wheels: 4,
     color: "read",
@@ -61,7 +61,7 @@ car.drive();                            // wroom wroom
 ```
 
 Create Empty Object - Without properties
-```
+```Javascript
 const car = new Object();
 const car = {}
 
@@ -70,7 +70,7 @@ console.log(car) // {color: "red"}
 ```
 
 Remove a properties from an object
-```
+```Javascript
 const car = {
     wheels: 4,
     color: "read",
@@ -80,7 +80,7 @@ delete car.color;
 ```
 
 Iterating through object properties
-```
+```Javascript
 var student = {
   name: "Mary", 
   age: 10, 
@@ -97,7 +97,7 @@ for(property in student) {
 ```
 
 Print Value of properties in the object
-```
+```Javascript
 for(property in student) {
   //bracket notation does
   console.log(student[property]);
@@ -109,7 +109,7 @@ for(property in student) {
 ```
 
 #### Constructor
-```
+```Javascript
 var Student = function(name, age) {
   this.name = name; 
   this.age = age;
@@ -125,7 +125,7 @@ All objects in JavaScript set out as nonspecific groups of data and related func
 The easiest way to instantiate objects is the Object() constructor that accepts an optional value as its argument. This value is stored as the wrapped value of the object, and it can be accessed through the valueOf() function.
 
 If you do not use the constructor argument or specify either null or undefined, an empty object will be used as the wrapped object value:
-```
+```Javascript
 var obj1 = new Object();
 var obj2 = new Object(null);
 var obj3 = new Object(undefined);
@@ -158,7 +158,7 @@ console.log(obj6.valueOf()); // Hi
 * unshift(var) - add item to beginning
 * toString() - print
 
-```
+```Javascript
 const fruitBasket = ['apple','banana','orange']
 // get the length of the Array
 console.log(fruitBasket.length); // 3
@@ -210,7 +210,7 @@ Null values intentionally are stored as null to indicate that the variable is em
 
 ## Functions
 **Function are variable**
-```
+```Javascript
 var sum = function(x, y){ return x + y; };
 var subtract = function(x, y){ return x - y; };
 var multiply = function(x, y){ return x * y; };
@@ -225,7 +225,7 @@ for(var i = 0; i < operations.length; i++){
 }
 ```
 Put Function collections in Object
-```
+```Javascript
 //functions can be stored in an object as property values
 var operations = {
   sum: function(x, y){ return x + y; }, 
@@ -242,7 +242,7 @@ console.log(operations["multiply"](5, 10));
 ```
 
 ### Default function arguments
-```
+```Javascript
 function calculatePrice(total, tax = 0.1, tip = 0.05){
   console.log(total + (total * tax) + (total * tip));
 }
@@ -254,7 +254,7 @@ We can futher improve it by **destructuring**
 
 We made the argument of our function an object. When calling the function, we don’t even have to worry about the order of the parameters because they are matched based on their key.
 
-```
+```Javascript
 function calculatePrice({
   total = 0,
   tax = 0.1,
@@ -267,7 +267,7 @@ const bill = calculatePrice({ tip: 0.15, total:150 });
 ```
 In the example above, the default value for tip was 0.05, and we overwrote it with 0.15. But we didn’t give a value to tax which remained the default 0.1.  
 Notice:
-```
+```Javascript
 {
   total = 0,
   tax = 0.1,
@@ -282,7 +282,7 @@ If we don’t default our argument object to an empty object, and we were to try
 
 ### Arrow Function
 ES6 introduced fat arrows (`=>`) as a way to declare functions. This is how we would normally declare a function in ES5:
-```
+```Javascript
 const greeting1 = function(name) {
   console.log("hello " + name);
 }
@@ -308,7 +308,7 @@ The next two examples show when to be careful using `this` inside of arrows.
 
 Example 1
 
-```
+```Javascript
 const button = document.querySelector("btn");
 button.addEventListener("click", () => {
   // error: *this* refers to the `Window` Object
@@ -317,7 +317,7 @@ button.addEventListener("click", () => {
 ```
 
 Example 2  
-```
+```Javascript
 const person1 = {
   age: 10,
   grow: function() {
@@ -343,7 +343,7 @@ person2.grow();
 
 Another difference between arrow functions and normal functions is the access to the arguments object. The arguments object is an array-like object that we can access from inside functions and contains the values of the arguments passed to that function.
 
-```
+```Javascript
 function example(){
   console.log(arguments[0])
 }
@@ -356,7 +356,7 @@ As you can see we accessed the first argument using an array notation arguments[
 Similarly to what we saw with the this keyword, arrow functions inherit the value of the arguments object from their parent scope.
 
 Example: exception
-```
+```Javascript
  const showWinner = () => {
   const winner = arguments[0];
   console.log(`${winner} was the winner`)
@@ -368,7 +368,7 @@ showWinner( "Usain Bolt", "Justin Gatlin", "Asafa Powell" )
 ```
 One work around is to sue spread operator `...`
 
-```
+```Javascript
 const showWinner = (...args) => {
   const winner = args[0];
   console.log(`${winner} was the winner`)
@@ -386,12 +386,12 @@ showWinner("Usain Bolt", "Justin Gatlin", "Asafa Powell")  // "Usain Bolt was th
 
 ## Regular Expression
 
-```
+```Javascript
 var pattern = /[A-Z]{3}-\d{3}/gi;
 ```
 
 The pattern part is `[A-Z]{3}-\d{3}`, and it matches every string that starts with three letters in the “A”-“Z” range, followed by a dash, and closed by three decimal digits. The `/gi` is the part of the flag, where g indicates global mode (the pattern will be applied to the whole string instead of stopping after the first match is found), and i indicates case-insensitive mode (the case of the pattern and the string are ignored when determining matches).
 
-```
+```Javascript
 var pattern = new RegExp("[A-Z]{3}-\\d{3}", "gi");
 ```

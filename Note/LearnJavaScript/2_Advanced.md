@@ -5,7 +5,7 @@
 Javascript Object Notation(`JSON`)   
 JavaScript uses the JSON syntax, however, JSON is not a part of the ECMAScript specification.
 
-```
+```Javascript
 var car = new Object();
 car.manufacturer = "BMW";
 car.type = "X5";
@@ -17,7 +17,7 @@ Object {manufacturer: "BMW", type: "X5"}
 
 ### JSON Syntax
 Nestaed JSON example
-```
+```Javascript
 {
   "id": 4234,
   "name": {
@@ -37,14 +37,14 @@ This object is very simple for it has only two methods, `stringify()` and `parse
 
 * stringfy()  
     The `stringify()` method converts the specified value (**first argument**) into its JSON representation. The method accepts two other optional arguments, a replacer object (**second argument**), and a spacing value (**third argument**).  
-    ```
+    ```Javascript
     var orderJson = JSON.stringify(order, null, "  ");
     console.log(orderJson);
     ```
 * parse()  
     The `parse()` method converts a JSON string into an object. The first argument of this method is the JSON string to be converted into an object, and it has a second, optional argument, which prescribes how the value originally produced by parsing is transformed, before being returned. 
 
-    ```
+    ```Javascript
     var remoteOrder = {
       "date": "11/20/2013",
       "customerId": 116,
@@ -82,7 +82,7 @@ Above code see .\Example\Advanced.js
 
 ### Remove Object Properties
 `delete` Keyword
-```
+```Javascript
 var myObject = new Object();
 myObject.intProp = 23;
 myObject.strProp = "Hi!";
@@ -100,14 +100,14 @@ console.log(myObject.strProp); // Hi!
 Check `OOP`
 
 ## Specifying Function
-```
+```Javascript
 var add = function (a, b) {
   return a + b;
 }
 ```
 **Because functions are objects, function expressions provide you a way to return a function from a function.**
 
-```
+```Javascript
 var type = "subtract";
 var op = getOperationFunc(type);
 console.log(op(35, 23)); // 12
@@ -128,7 +128,7 @@ function getOperationFunc(type) {
 Similar to C++/C's function pointer and C#'s delegates functions.
 
 ### Recursion
-```
+```Javascript
 function fibonacci(index) {
       if (index == 0) return 0;
       if (index == 1) return 1;
@@ -139,7 +139,7 @@ function fibonacci(index) {
 
 ## Closures
 **Functions that have access to variables from other function's scopes are called closures.**
-```
+```Javascript
 var addOp = createOp("add");
 // ...
 console.log(addOp(23, 12));      // 35
@@ -152,7 +152,7 @@ Earlier you learned that whenever a variable is accessed inside a function, the 
 
 A function that is defined inside another function adds the containing function’s activation object into its scope chain. This ensures that the internal function has access to the variables of the containing function. So, in createOp, the returned function’s scope chain includes the activation object for createOp. When the console.log() operation invokes the anonymous function through addOp, the execution context of addOp looks like as shown in the image below.
 
-```
+```Javascript
 var type = "Mercedes"
 var myCar = {
   type: "BMW",
@@ -182,7 +182,7 @@ console.log(myCar.getTypeClosureFuncion()()); \\print BMW
 ### Using variables in anonymous functions and closures
 **Sometimes it is not obvious, but variables work in closures unexpectedly.**
 
-```
+```Javascript
 function giveMeFunctions() {
       var functions = [];
       for (var i = 0; i < 3; i++) {
@@ -210,7 +210,7 @@ The anonymous function is evaluated when it is invoked and using the execution c
 
 As you iterate through the elements in the returned function array, the i*i expression is evaluated using the value of i, which happens to be 3 each time. That is why you see only nines in the output. There is a quick fix for this issue.
 
-```
+```Javascript
 function giveMeFunctions() {
   var functions = [];
   for (var i = 0; i < 3; i++) {
@@ -234,7 +234,7 @@ function giveMeFunctions() {
 **Spread** syntax allows an iterable such as an array expression or string to be expanded in places where zero or more arguments (for function calls) or elements (for array literals) are expected, or an object expression to be expanded in places where zero or more key-value pairs (for object literals) are expected.
 
 ### Combine Array
-```
+```Javascript
 const veggie = ["tomato","cucumber","beans"];
 const meat = ["pork","beef","chicken"];
 
@@ -253,7 +253,7 @@ console.log(menu);
 
 
 #### Spread into function
-```
+```Javascript
 // OLD WAY
 function doStuff (x, y, z) {
   console.log(x + y + z);
@@ -274,7 +274,7 @@ console.log(args);
 ### Rest parameter
 The **rest** syntax looks exactly the same as the **spread**- 3 dots `...`. But it is quite the opposite of it. **Spread** expands an array, while **rest** condenses multiple elements into a single one.
   
-```
+```Javascript
 const runners = ["Tom", "Paul", "Mark", "Luke"];
 const [first,second,...losers] = runners;
 
@@ -297,7 +297,7 @@ In my opinion, it is an alternative of iterator. (iterator in Javascript require
 * Our function is paused between each `.next()` call.
 
 General Example  
-```
+```Javascript
 function* fruitList(){
   yield 'Banana';
   yield 'Apple';
@@ -319,7 +319,7 @@ console.log(fruits.next());
 ```
 
 ### Create generator for Array
-```
+```Javascript
 // create an array of fruits
 const fruitList = ['Banana','Apple','Orange','Melon','Cherry','Mango'];
 
@@ -341,7 +341,7 @@ console.log(fruitGenerator.next().value);
 ```
 
 ### Finish Generator with Return
-```
+```Javascript
 function* fruitList(){
   yield 'Banana';
   yield 'Apple';
@@ -355,7 +355,7 @@ console.log(fruits.return());
 ```
 
 ### Catching Error with Throw()
-```
+```Javascript
 function* gen(){
   try {
     yield "Trying...";
@@ -383,7 +383,7 @@ Using a `generator` in combination with a `Promise` will allow us to write async
 
 What we want to do is wait for a promise to resolve and then pass the resolved value back into our generator in the `.next()` call.
 
-```
+```Javascript
 const myPromise = () => new Promise((resolve) => {
   resolve("our value is...");
 });

@@ -17,7 +17,7 @@ Happens when we try to write asynchronous code as if it were synchronous, meanin
     
     do A, If A do B, if B do C and so on and so forth.
 
-```
+```Javascript
 const makePizza = (ingredients, callback) => {
     mixIngredients(ingredients, function(mixedIngredients)){
       bakePizza(mixedIngredients, function(bakedPizza)){
@@ -34,7 +34,7 @@ A `Promise` is an object representing the eventual completion or failure of an a
 
 `setTimeout()` to wait a certain time before resolving.
 
-```
+```Javascript
 const myPromise = new Promise((resolve, reject) => {
   setTimeout(() => {
       resolve("The value we get from the promise");
@@ -58,7 +58,7 @@ Looking at our error log, you can see that it tells us where the error occurred.
 
 
 ## Chaining promises
-```
+```Javascript
 const myPromise = new Promise((resolve, reject) => {
   resolve();
 });
@@ -85,7 +85,7 @@ As you can see, the first `then` passed a value down to the second one where we 
 
 We’re not limited to chaining in case of success, we can also chain when we get a `reject`.
 
-```
+```Javascript
 const myPromise = new Promise((resolve, reject) => {
   resolve();
 });
@@ -108,7 +108,7 @@ myPromise
 We did not get “first value” because we threw an error therefore we only got the first `.catch()` and the last `.then()`.
 
 ### Promise.resolve() and Promise.reject()
-```
+```Javascript
 //Promise.resolve()
 Promise.resolve('Success').then(function(value) {
   console.log(value);
@@ -128,7 +128,7 @@ Promise.reject(new Error('fail')).then(function() {
 
 ### Promise.all() and Promise.race()
 * Promise.all() returns a single Promise that resolves when all promises have resolved.
-    ```
+    ```Javascript
     const promise1 =  new Promise((resolve,reject) => {
     setTimeout(resolve, 500, 'first value');
     });
@@ -171,7 +171,7 @@ If we were to pass an empty iterable then it will return an already resolved pro
 
 If one of the promises was rejected, then all of them would asynchronously reject with the value of that rejection even if they resolved.
 
-```
+```Javascript
 const promise1 =  new Promise((resolve,reject) => {
   resolve("my first value");
 });
@@ -193,7 +193,7 @@ Promise
 ```
 
 * Promise.race() on the other hand returns a promise that resolves or rejects as soon as one of the promises in the iterable resolves or rejects with the value from that promise.
-```
+```Javascript
 const promise1 =  new Promise((resolve,reject) => {
   setTimeout(resolve, 500, 'first value');
 });

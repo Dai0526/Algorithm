@@ -3,7 +3,7 @@ Quoting MDN:
 “Classes are primarily syntactic sugar over Javascript's **existing prototype-based inheritance**. The class syntax **does not** introduce a new object-oriented inheritance model to JavaScript.”
 
 ### prototype-based inheritance
-```
+```Javascript
 function Person(name,age) {
   this.name = name;
   this.age = age;
@@ -24,7 +24,7 @@ caroline.greet();
 A new method called `greet` is added to the prototype in order to make it accessible to all the new instances of Person that we created.
 
 ## Create a class
-```
+```Javascript
 // class declaration
 class Person {
 
@@ -37,7 +37,7 @@ const person = class Person {
 Remember: class declaration (and expression) are not hoisted, which means that unless you want to get a ReferenceError you need to declare your class before you access it.
 
 ### Constructor
-```
+```Javascript
 class Person {
   constructor(name,age){
     this.name = name;
@@ -62,7 +62,7 @@ alberto.farewell();
 ## Static Methods
 Call by className.function(...)
 
-```
+```Javascript
 class Person {
   constructor(name,age){
     this.name = name;
@@ -81,7 +81,7 @@ Person.info();     // Correct
 ```
 
 ## Setter and getter
-```
+```Javascript
 class Person {
   constructor(name,surname) {
     this.name = name;
@@ -116,7 +116,7 @@ class A extends B
 ... 
 }
 
-```
+```Javascript
 // our initial class
 class Person {
   constructor(name,age){
@@ -141,7 +141,7 @@ const alberto = new Adult("Alberto",26,"software developer");
 ```
 
 ### Extend std objects - Array
-```
+```Javascript
 class Classroom extends Array {
   // we use rest operator to grab all the students
   constructor(name, ...students){
