@@ -28,3 +28,47 @@ When entities at various levels depend horizontally and vertically on various ot
 * **Factory method** pattern is a specialization of the template method pattern.
 
 * **Interface** The number of methods for which the subclasses need to provide implementation should be minimized when applying the template method pattern.
+
+## Demo
+
+### Output
+```
+Run Scout Recon
+Step 1: Loaded Scan Parameters
+Step 2: Loaded Configuration
+Step 3: Loaded Data
+Step 4 (overrided): Set Geomtry for Scout Recon
+Step 5: Create Agent
+        Create Prep Agent
+        Create Rebin Agent
+        Create BP Agent
+Step 6: Start Agent to do Reconstruction
+Step 7: Image Saved
+
+Run Axial Recon
+Step 1: Loaded Scan Parameters
+Step 2: Loaded Configuration
+Step 3: Loaded Data
+Step 4 (overrided): Set Geomtry for Axial Recon
+Step 5 (overrided): Create Agent
+        Create Prep Agent
+        Create Rebin Agent
+        Create BP Agent
+        Create Bone Correction Agent
+Step 6: Start Agent to do Reconstruction
+Step 7: Image Saved
+
+Run Helical Reocn
+Step 1: Loaded Scan Parameters
+Step 2: Loaded Configuration
+Step 3: Loaded Data
+Step 4 (overrided): Set Geomtry for Helical Recon
+Step 5 (overrided): Create Agent
+        Create Prep Agent
+        Create Fixframe Agent
+        Create Rebin Agent
+        Create BP Agent
+        Create Bone Correction Agent
+Step 6: Start Agent to do Reconstruction
+Step 7: Image Saved
+```
