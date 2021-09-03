@@ -9,7 +9,7 @@ protected:
         std::cout << "Step 4 (overrided): Set Geomtry for Helical Recon" << std::endl;
     }
 
-    virtual void CreateAgent() {
+    virtual void CreateAgent() override {
         std::cout << "Step 5 (overrided): Create Agent" << std::endl;
         std::cout << "\tCreate Prep Agent" << std::endl;
         std::cout << "\tCreate Fixframe Agent" << std::endl;
