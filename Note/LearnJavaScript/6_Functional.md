@@ -115,3 +115,12 @@ console.log(bestTitles());
 console.log(averageNolanRating());
 ```
 
+## Pure Functions
+A pure function is a function that has the following characteristics:  
+* Its outputs depend solely on its inputs
+* It has no side effect  
+
+A side effect is a change in program state or an interaction with the outside world. A database access or a console.log() statement are examples of side effects.
+
+Given the same data, a pure function will always produce the same result. By design, a pure function is independent from the program state and must not access it. Such a function must accept parameters in order to do something useful. The only way for a function without parameters to be pure is to return a constant value.
+
