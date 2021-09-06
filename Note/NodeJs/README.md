@@ -46,3 +46,7 @@ The CallStack is as follow
 | 5 | empty | api 1, other idel| api 1 execute while second logged|
 | 6 | log(This was..) | all idel| put log to queue|
 | 7 | empty | all idel| pring this was...|
+
+## Blocking and Non-blocking
+Use Asynchronous processing to provent blocking.
+Node.js applications run on a single thread and are still able to keep up with multi-threaded applications. This is because Node.js takes full advantage of asynchronous computing. It allows a single server to handle multiple clients at once. Processes, such as fetching data from storage or making new connections, can all be performed asynchronously, ensuring that the application does not get blocked. Furthermore, Node.js processes code sequentially. Without asynchronous operations, the entire program would halt until a file is read or a setTimeout() is called.
