@@ -57,10 +57,10 @@ There are 4 Layers through Domain Name Query Process:
 4. Rendering Pages
 5. Cloase TCP Connection
 
-_Diagram for IP resolving_
+_Diagram for IP resolving_  
 ![Image of ResolveDomainName](./assets/ResolveDomainName.png)
 
-_Diagram for TCP/IP 3-way Handshake_
+_Diagram for TCP/IP 3-way Handshake_  
 ![Image of TCPSHandShake](./assets/TCPSHandShake.png)
 
 
