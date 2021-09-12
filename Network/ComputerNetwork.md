@@ -4,29 +4,32 @@ There are two main purposes of computer networks:
 1. Communication using computers and 
 2. Sharing of resources. 
 
-## Protocol
+## Web Basic
+
+### Protocol
 Protocol is an analogy that end systems used to communicate with each other effectively on the network.
 
-### TCP
-The Transmission Control Protocol (TCP) is one such protocol. It was created to allow end systems to communicate effectively. The distinguishing feature of TCP is that it ensures that data reaches the intended destination and is not corrupted along the way.
+#### TCP
+The Transmission Control Protocol (**TCP**) is one such protocol. It was created to allow end systems to communicate effectively. The distinguishing feature of TCP is that it ensures that data reaches the intended destination and is not corrupted along the way.
 
-### UDP
-The User Datagram Protocol (UDP) is also one such key protocol. However, it does not ensure that data reaches the destination and that it remains incorrupt.
+#### UDP
+The User Datagram Protocol (**UDP**) is also one such key protocol. However, it does not ensure that data reaches the destination and that it remains incorrupt.
 
-### HTTP
-HyperText Transfer Protocol (HTTP) is a web protocol that defines the format of messages to be exchanged between web clients, e.g., web browsers and web servers and what action is to be taken in response to the message. The World Wide Web uses this as its underlying protocol.
+#### HTTP/HTTPS
+HyperText Transfer Protocol (**HTTP**) is a web protocol that defines the format of messages to be exchanged between web clients, e.g., web browsers and web servers and what action is to be taken in response to the message. The World Wide Web uses this as its underlying protocol.  
+**HTTPS** is an acronym for HyperText Transfer Protocol Secure, and it is basically just the secure version of HTTP
 
-## Packets
+### Packets
 Smaller sizes transmission units - make usage of network fairer amongst end-systems.(compare to large file) 
 
-## Addressing - Endpoint(**socket**)
+### Addressing - Endpoint(**socket**)
 Each endpoint in a communication session is identified with a unique `IP address` and `port` combination.
 
-* IP Addresses
+* **IP Addresses**
     * IP addresses are 32 bit numbers (in IP version 4).
     * dotted decimal notation (8 bits) at a time
         * 255.255.255.255
-* Port
+* **Port**
     * IP addresses identify end systems but ports identify an application on the end system.
     * Every application has a 16-bit port number. So the port number could range from 00 to 2^{16}=65535
     * The ports 0-10230−1023 are reserved for specific applications and are called well-known ports.
@@ -40,6 +43,59 @@ Port allocation:
 1. Well-Known: 0 - 1023
 2. Registered: 1024 - 49151
 3. Dynamic: 49152 - 65535
+
+### Switch and Router
+| Key | **Router** | **Switch** |
+|----|----|----|
+|Objective|Router is to connect various networks.| Switch is to connect various devices in a network.|
+|Layer|Network Layer|Data Link Layer|
+|Usage|Router is used in LAN and MAN|	Switch is used only in LAN|
+|Data Format|Router sends data in form of packets.|Switch sends data in form of packets and frames.|
+|Mode of Transmission|Router follows duplex mode of transmission.|Switch also follows duplex mode of transmission.|
+|Collision|Less collision in case of Router.|In full duplex mode, no collision happens in switch too.|
+|Services|NAT, NetFlow and QoS Services |imcompatible|
+|Type|Routing type is Adaptive and Non-adaptive routing.|Switching type is Circuit, Packet and Message switching.|
+
+#### Applications
+Applications of Router
+1. Creates a local area network(LAN).
+2. It allows you to split your internet connection to all of your devices.
+Connect different media/devices with each other
+3. Run a firewall.
+4. The routers determine where to send information from one computer to another
+5. Packet Forwarding, Switching, and filtering.
+6. Router also makes sure that information does make it to the intended destination.
+7. Connect to a VPN
+
+Applications of Switches
+1. A switch helps you to manage the flow of data across the network.
+2. Medium to large-sized LANs containing a number of linked managed switches.
+3. Switches are widely used in SOHO(Small Office/Home Office) applications. SOHO mostly uses a single switch to access the various broadband services.
+4. It is used in a computer network to connect the devices together physically.
+5. A switch can transfer data to any of the other devices, either using half-duplex mode or full-duplex mode.
+
+#### Pros and Cons
+Advantages:
+1. Router
+    1. It helps to share a network connection with multiple machines that increases productivity.
+    2. A router allows delivering the packets of data in an organized way, which helps to lower the data load.
+    3. Router offers a steady and reliable connection between network hosts.
+    4. Routers make use of the alternative parts in case the main part fails to transfer data packets.
+2. Switch
+    1. It helps you to reduce the number of broadcast domains.
+    2. Supports VLAN’s that can help in Logical segmentation of ports
+    3. Switches can make use of CAM table for Port to MAC mapping  
+
+Disadvantages
+1. Router:
+    1. Connections can become slow when multiple computers are using a network. This situation is described as a connection wait.
+    2. A router helps multiple computers to share the same network, which may lower the speed.
+
+2. Switch
+    1. Not as good as a router for limiting broadcasts
+    2. Communication between VLANs requires inter VLAN routing, but these days, there are many multilayer switches available in the market.
+    3. Handling multicast packets that requires quite a bit of configuration & proper designing.
+    4. It helps to reduce the number of broadcast domains.
 
 
 ## Layered Architectures & Protocol Stacks
