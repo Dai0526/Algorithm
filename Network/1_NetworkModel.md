@@ -1,4 +1,4 @@
-## Layered Architectures & Network Model
+# Layered Architectures & Network Model
 Layered architectures give us modularity by allowing us to discuss specific, well-defined parts of larger systems. This makes **changing implementation-level details** and **identifying bugs easier**.
 
 * Vertical Layers

@@ -106,9 +106,9 @@ Layered architectures give us modularity by allowing us to discuss specific, wel
 * Horizontal Layers
     * Layers communicate with their parallesls. e.g. application 1 to application 2, etc.
 
-## Common Models
+### Common Models
 
-### Open Systems Interconnection (OSI)
+#### Open Systems Interconnection (OSI)
 7 abstract layers
 | OSI Model  |
 |------------|
@@ -177,7 +177,7 @@ Layered architectures give us modularity by allowing us to discuss specific, wel
 
 ![OSI Model](./assets/OSIModel.png)
 
-### Transmission Control Protocol/Internet Protocol (TCP/IP)
+#### Transmission Control Protocol/Internet Protocol (TCP/IP)
 
 5 layers
 | TCP/IP     |
