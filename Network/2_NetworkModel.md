@@ -1,48 +1,4 @@
-# Computer Network 
-
-There are two main purposes of computer networks: 
-1. Communication using computers and 
-2. Sharing of resources. 
-
-## Protocol
-Protocol is an analogy that end systems used to communicate with each other effectively on the network.
-
-### TCP
-The Transmission Control Protocol (TCP) is one such protocol. It was created to allow end systems to communicate effectively. The distinguishing feature of TCP is that it ensures that data reaches the intended destination and is not corrupted along the way.
-
-### UDP
-The User Datagram Protocol (UDP) is also one such key protocol. However, it does not ensure that data reaches the destination and that it remains incorrupt.
-
-### HTTP
-HyperText Transfer Protocol (HTTP) is a web protocol that defines the format of messages to be exchanged between web clients, e.g., web browsers and web servers and what action is to be taken in response to the message. The World Wide Web uses this as its underlying protocol.
-
-## Packets
-Smaller sizes transmission units - make usage of network fairer amongst end-systems.(compare to large file) 
-
-## Addressing - Endpoint(**socket**)
-Each endpoint in a communication session is identified with a unique `IP address` and `port` combination.
-
-* IP Addresses
-    * IP addresses are 32 bit numbers (in IP version 4).
-    * dotted decimal notation (8 bits) at a time
-        * 255.255.255.255
-* Port
-    * IP addresses identify end systems but ports identify an application on the end system.
-    * Every application has a 16-bit port number. So the port number could range from 00 to 2^{16}=65535
-    * The ports 0-10230−1023 are reserved for specific applications and are called well-known ports.
-        * For instance, port 80 is reserved for HTTP traffic.
-    * The ports 1024-491521024−49152 are known as registered ports and they are used by specific, potentially proprietary, applications that are known but not system defined.
-        * SQL server for example, uses port 14331433
-        * It is generally considered best practice not to use these ports for any user defined applications although there is no technical restriction on using them.
-    * The ports 49152–65535 can be used by user applications or for other purposes (dynamic port allocation for instance, but more on that later).
-
-Port allocation:
-1. Well-Known: 0 - 1023
-2. Registered: 1024 - 49151
-3. Dynamic: 49152 - 65535
-
-
-## Layered Architectures & Protocol Stacks
+## Layered Architectures & Network Model
 Layered architectures give us modularity by allowing us to discuss specific, well-defined parts of larger systems. This makes **changing implementation-level details** and **identifying bugs easier**.
 
 * Vertical Layers
@@ -137,4 +93,3 @@ Layered architectures give us modularity by allowing us to discuss specific, wel
 * TCP/IP, on the other hand, wasn’t really a model. People just implemented it and got it to work. Then, people **reverse-engineered a reference model** out of it for theoretical and pedagogical purposes. So, something that “sounds like” a great idea might not be the eventual winner. It’s de facto vs de jure standards.
 
 ![OSI vs TCPIP](./assets/OSIandTCPIPModel.png)
-
