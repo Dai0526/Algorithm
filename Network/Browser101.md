@@ -53,6 +53,7 @@ There are 4 Layers through Domain Name Query Process:
 2. Initiates connection with targeting Server
     * TCP/IP 3-way handshake
 3. Communication to get data
+    * HTTP exchange
     * Request -> Response
 4. Rendering Pages
 5. Cloase TCP Connection
@@ -63,6 +64,38 @@ _Diagram for IP resolving_
 _Diagram for TCP/IP 3-way Handshake_  
 ![Image of TCPSHandShake](./assets/TCPSHandShake.png)
 
+
+#### Parsing a sample request
+```http
+GET / HTTP/1.1
+Host: google.com
+Accept: */*
+```
+
+* `GET / HTTP/1.1`: with the start line, the browser asks the server to retrieve the document at the location /, adding that the rest of the request will follow the HTTP/1.1 protocol. It could also have used 1.0 or 2.
+
+* `Host: google.com`: this is the only **HTTP header mandatory in HTTP/1.1**. Since the server might serve multiple domains (google.com, google.co.uk, etc.) the client here mentions that the request was for that specific host.
+
+* `Accept: */*`: an optional header, where the browser is telling the server that it will accept any kind of response back. The server could have a resource that is available in JSON, XML, or HTML formats, so it can pick whichever format it prefers.
+
+#### Parsing a sample response
+
+```http
+HTTP/1.1 200 OK
+Cache-Control: private, max-age=0
+Content-Type: text/html; charset=ISO-8859-1
+Server: gws
+X-XSS-Protection: 1; mode=block
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: NID=1234; expires=Fri, 18-Jan-2019 18:25:04 GMT; path=/; domain=.google.com; HttpOnly
+
+<!doctype html><html">
+...
+...
+</html>
+```
+
+`200 OK` - Response status
 
 ### Reference
 * Inside Look at Modern Web Browser
