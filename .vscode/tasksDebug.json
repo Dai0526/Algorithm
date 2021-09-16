@@ -6,7 +6,6 @@
 			"executable": "cmd.exe",
 			"args": [
 			  "/C",
-			  // The path to VsDevCmd.bat depends on the version of Visual Studio you have installed.
 			  "\"D:/Software/VisualStudio/Common7/Tools/VsDevCmd.bat\"",
 			  "&&"
 			]
@@ -22,8 +21,6 @@
 				"/Zi",
 				"/EHsc",
 				"/nologo",
-				"/O2",
-				"/Oi",
 				"/Fe:",
 				"${fileDirname}\\..\\bin\\${fileBasenameNoExtension}.exe",
 				"${file}"
