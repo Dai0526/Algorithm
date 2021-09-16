@@ -143,5 +143,5 @@ void CorrectnessTest(){
 int main(){
     
     perfTest1();
-    //CorrectnessTest();
+    CorrectnessTest();
 }

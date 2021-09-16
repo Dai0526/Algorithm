@@ -16,18 +16,67 @@
 	"tasks": [
 		{
 			"type": "shell",
-			"label": "C/C++: cl.exe build active file",
+			"label": "C/C++: cl.exe build release",
 			"command": "cl.exe",
 			"args": [
 				"/Zi",
+				"/W2",
 				"/EHsc",
 				"/nologo",
 				"/O2",
+				"/sdl",
 				"/Oi",
+				"/Gy",
+				"/GS",
+				"/GL",
+				"/Gm-",
 				"/Fe:",
-				"${fileDirname}\\..\\bin\\${fileBasenameNoExtension}.exe",
+				"${fileDirname}\\..\\bin\\Release\\${fileBasenameNoExtension}.exe",
+				"/Fd:",
+				"${fileDirname}\\..\\bin\\Release\\",
+				"/Fo:",
+				"${fileDirname}\\..\\bin\\Release\\",
 				"${file}"
 			],
+			"presentation": {
+                "echo": true,
+                "reveal": "always",
+                "panel": "shared"
+            },
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build",
+			"detail": "compiler: cl.exe"
+		},
+		{
+			"type": "shell",
+			"label": "C/C++: cl.exe build Debug",
+			"command": "cl.exe",
+			"args": [
+				"/ZI",
+				"/W2",
+				"/EHsc",
+				"/nologo",
+				"/Od",
+				"/sdl",
+				"/GS",
+				"/Fe:",
+				"${fileDirname}\\..\\bin\\Debug\\${fileBasenameNoExtension}.exe",
+				"/Fd:",
+				"${fileDirname}\\..\\bin\\Debug\\",
+				"/Fo:",
+				"${fileDirname}\\..\\bin\\Debug\\",
+				"${file}"
+			],
+			"presentation": {
+                "echo": true,
+                "reveal": "always",
+                "panel": "shared"
+            },
 			"options": {
 				"cwd": "${fileDirname}"
 			},
