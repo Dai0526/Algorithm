@@ -66,4 +66,37 @@ public:
         return s.length() - r;
     }
     
+    // solution 2
+    string shortestPalindrome(string s) {
+        int len = s.length();
+        string prefix;
+        
+        for(int i = len; i > 0; --i){
+            string temp = s.substr(0, i);
+            if(checkPlai(temp)){
+                break;
+            }
+            prefix += s[i - 1];
+        }
+        
+        s = prefix + s;
+        
+        return s;
+        
+    }
+    
+    bool checkPlai(string& s){
+        int l = 0;
+        int r = s.length() - 1;
+        while(l < r){
+            if(s[l] != s[r]){
+                return false;
+            }
+            
+            --r;
+            ++l;
+        }
+        return true;  
+    }
+
 };
