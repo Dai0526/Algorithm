@@ -49,5 +49,10 @@ Path Compression by recursion to optimize Find
 |Quick Find| O(N) | O(1)| O(N) | O(1) |
 |Quick Union| O(N) | O(H)| O(H) | O(H) | 
 |By Rank| O(N) | O(logN)| O(logN) | O(logN) |
+|Rank + Path Comp|	O(N) |	O(⍺(N))	| O(⍺(N)) |	O(⍺(N))
 
-Note: N is the number of vertices in the graph. H is the height of the tree.
+Note:   
+* N is the number of vertices in the graph. 
+* H is the height of the tree.
+* ⍺ refers to the Inverse Ackermann function. 
+    * In practice, we assume it's a constant, which is regarded as O(1) on average. 
