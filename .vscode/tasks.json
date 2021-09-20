@@ -14,6 +14,22 @@
 		}
 	  },
 	"tasks": [
+		{			
+			"type": "shell",
+			"label": "Setup output directory",
+
+			"windows": {
+				"command": "cmd",
+				"args": [
+					"/C", 
+					"if not exist .\\bin mkdir .\\bin",
+					"if not exist .\\bin\\release mkdir .\\bin\\release",
+					"if not exist .\\bin\\debug mkdir .\\bin\\debug"
+				],
+			},
+			"group": "build",
+			"detail": "cmd create output directory"
+		},
 		{
 			"type": "shell",
 			"label": "C/C++: cl.exe build release",
@@ -29,13 +45,14 @@
 				"/Gy",
 				"/GS",
 				"/GL",
+				"/FS",
 				"/Gm-",
 				"/Fe:",
-				"${fileDirname}\\..\\bin\\Release\\${fileBasenameNoExtension}.exe",
+				"${workspaceFolder}\\bin\\Release\\${fileBasenameNoExtension}.exe",
 				"/Fd:",
-				"${fileDirname}\\..\\bin\\Release\\",
+				"${workspaceFolder}\\bin\\Release\\",
 				"/Fo:",
-				"${fileDirname}\\..\\bin\\Release\\",
+				"${workspaceFolder}\\bin\\Release\\",
 				"${file}"
 			],
 			"presentation": {
@@ -64,12 +81,13 @@
 				"/Od",
 				"/sdl",
 				"/GS",
+				"/FS",
 				"/Fe:",
-				"${fileDirname}\\..\\bin\\Debug\\${fileBasenameNoExtension}.exe",
+				"${workspaceFolder}\\bin\\Debug\\${fileBasenameNoExtension}.exe",
 				"/Fd:",
-				"${fileDirname}\\..\\bin\\Debug\\",
+				"${workspaceFolder}\\bin\\Debug\\",
 				"/Fo:",
-				"${fileDirname}\\..\\bin\\Debug\\",
+				"${workspaceFolder}\\bin\\Debug\\",
 				"${file}"
 			],
 			"presentation": {
