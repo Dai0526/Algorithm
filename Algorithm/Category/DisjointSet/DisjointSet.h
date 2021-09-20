@@ -1,9 +1,9 @@
 #include <vector>
 using namespace std;
 
-class UnionFindByRank {
+class UnionFind {
 public:
-    UnionFindByRank(int n) : m_root(n), m_rank(n) {
+    UnionFind(int n) : m_root(n), m_rank(n) {
         for (int i = 0; i < n; ++i) {
             m_root[i] = i;
             m_rank[i] = 1;
@@ -11,10 +11,10 @@ public:
     }
 
     int find(int x) {
-        while (x != m_root[x]) {
-            x = m_root[x];
+        if (x == m_root[x]) {
+            return x;
         }
-        return x;
+        return m_root[x] = find(m_root[x]);
     }
 
     void unionSet(int x, int y) {

@@ -1,4 +1,5 @@
-
+#include "./DisjointSet.h"
+#include "./DisjointSetQuickUnionPathCompression.h"
 #include "./DisjointSetByRank.h"
 #include "./DisjointSetQuickFind.h"
 #include "./DisjointSetQuickUnion.h"

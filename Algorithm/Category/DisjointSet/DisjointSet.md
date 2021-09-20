@@ -37,6 +37,11 @@ Array Index 0  1  2  3  4  5  6    Vertex
 ## By Rank
 Quick Union based optimazation by balancing the tree
 
+## Optimization 
+Path Compression by recursion to optimize Find  
+    - After finding the root node, we can update the parent node of all traversed elements to their root node. When we search for the root node of the same element again, we only need to traverse two elements to find its root node, which is highly efficient.
+
+
 ## Comparison
 
 | |Init|Find|Union|Connected
