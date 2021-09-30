@@ -221,7 +221,9 @@ Location Service
 
 ## Componments and Utilities
 * [Load Balancer](Componments/LoadBalance/LoadBalance.md)
-
+* [Cache](Componments/Cache/Cache.md)
+    * [Memcached](Componments/Cache/Memcached.md)
+    * [Redis](Componments/Cache/Redis.md)
 
 ## Learnning Resources 
 
