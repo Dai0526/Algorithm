@@ -219,6 +219,8 @@ Location Service
 * 该服务在分布式的系统下也应该正常运行，因为这些API能通过不同的服务器进行访问
 * 怎么处理节流问题？
 
+## Componments and Utilities
+* [Load Balancer](Componments/LoadBalance/LoadBalance.md)
 
 
 ## Learnning Resources 
