@@ -250,7 +250,9 @@ Location Service
     * https://redditblog.com/
     * https://www.zynga.com/blogs/engineering
 3. Courses
-
+    * [Scale Your App](https://www.scaleyourapp.com/category/real-life-architectures/)
+    * [Educative.io](https://www.educative.io/path/scalability-system-design)
+    * [ACE](https://acecodeinterview.com/)
 4. Engineering Blog
     * [Benchling](https://benchling.engineering/)
     * [Airbnb](https://medium.com/airbnb-engineering)
