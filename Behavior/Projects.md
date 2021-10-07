@@ -1,8 +1,8 @@
 # Interview Presentation Preparation (KLA)
 
 * [Past projects](##-Past-Projects)
-    * [Concurrent Data Pipeline](###-Concurrent-Data-Pipeline)
-    * [Refactory Recon](###-Refactory-Recon(worker)-and-ReconMain(Job-coordinator))
+    * [Concurrent Data Pipeline](###-concurrent-data-pipeline)
+    * [Refactory Recon](###-refactory-reconworker-and-reconmainjob-coordinator)
 * C++ fundmental
 * High Performance Data Computing
     * IPP and AVX
