@@ -1,4 +1,6 @@
-# Interview Presentation Preparation
+# Interview Preparation
+
+## Overview
 * [Past projects](./PastProjects.md)
     * FMI Medical System
         1. [Concurrent Data Pipeline](#concurrent-data-pipeline)
@@ -42,7 +44,26 @@
 * [Operating System](./OperatingSystems.md)
     * Linux
     * Windows
-* [ComputerNetwork](./ComputerNetwork.md)
+* [Computer Network](./ComputerNetwork.md)
+* [Data Storage](./DataStorage.md)
+    * Database
+        * MySQL
+        * Mongo
+        * Key–value database
+        * GraphQL
+    * Elastic search
+    * Filesystem
 * [Behaviors](./BehaviorQuestions.md)
+
+
+
+## Algorithm
+
+## Object Oriented Design
+
+## System Design
+
+## SQL
+
 
 
