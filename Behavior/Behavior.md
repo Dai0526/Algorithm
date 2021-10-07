@@ -21,3 +21,4 @@ Follow `STAR` method and combine with targeting company's principle value
 2. Hypotheticals
 3. Values-Based Questions
 4. Asking Questions
+
