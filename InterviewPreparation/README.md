@@ -59,6 +59,8 @@
 
 ## Algorithm
 
+## Data Structure
+
 ## Object Oriented Design
 
 ## System Design
