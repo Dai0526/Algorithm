@@ -35,6 +35,17 @@ using namespace std;
 
 class Solution {
 public:
+    
+    void rev(vector<int>& nums, int begin, int end){ 
+        while(begin < end){
+            int temp = nums[begin];
+            nums[begin] = nums[end];
+            nums[end] = temp;
+            ++begin;
+            --end;
+        } 
+    }
+    
     void rotate(vector<int>& nums, int k) {
         // shift to right, k is positive
         int n = nums.size();
@@ -45,9 +56,12 @@ public:
         
         int shift = k % n;
         
-        reverse(nums.begin(), nums.end());
-        reverse(nums.begin(), nums.begin() + shift);
-        reverse(nums.begin() + shift, nums.end());
+        //reverse(nums.begin(), nums.end());
+        //reverse(nums.begin(), nums.begin() + shift);
+        //reverse(nums.begin() + shift, nums.end());
+        rev(nums, 0, n - 1);
+        rev(nums, 0, shift - 1);
+        rev(nums, shift, n - 1);
     }
     
     
