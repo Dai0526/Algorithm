@@ -1,5 +1,5 @@
 # Interview Presentation Preparation
-* [Past projects](#past-projects)
+* [Past projects](.\PastProjects.md)
     1. [Concurrent Data Pipeline](#concurrent-data-pipeline)
     2. [Refactory Recon](#refactory-reconworker-and-reconmainjob-coordinator)
     3. [High Performance Data Computing]
@@ -7,16 +7,18 @@
         * [CUDA]
         * [AVX]
     4. [Data Acqusition](#-data-acquistion)
-    5. Motion and Scan Control
+    5. [Motion and Scan Control]
         * [State Machine Framework]
     6. Rotor Calibration Tool
     7. DICM
+        * Object hirecry
+        * Serization and Deserization
+        * Transportation
     8. Software Configuration Tool
     9. CI/CD
         * Jenkins Build Server
         * Test Automation
         * Performance Profiling
-
 * [C++ fundmental]
     * memory model
         * stack
