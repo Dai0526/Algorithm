@@ -1,5 +1,5 @@
 # Interview Presentation Preparation
-* [Past projects](.\PastProjects.md)
+* [Past projects](./PastProjects.md)
     1. [Concurrent Data Pipeline](#concurrent-data-pipeline)
     2. [Refactory Recon](#refactory-reconworker-and-reconmainjob-coordinator)
     3. [High Performance Data Computing]
