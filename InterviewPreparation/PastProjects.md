@@ -25,6 +25,10 @@ The architecture itself utlize the computing resources. It makes sure as less id
     * Thread is the worker in agents
         * run the execution function
     * SyncGetInput and SyncGetOutput to obtain buffer one thread at a time
+    * CheckStall
+        * Outer program monitor each threads processing time
+            * a thread to check regularly
+        * internal timer to monitor processing time, if last check equal to current processing time, then the thread is stalled.
 * Pipe
     * Container class
         * use sync Queue to store meta info
