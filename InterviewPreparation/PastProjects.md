@@ -87,8 +87,8 @@ Thus, Assembly language for vector computing, basic calculations for 8 floats(25
 ### Jungo Driver and WDK  
 
 
-### Montion Control and Scan Control
-#### State Machine Framework
+## Montion Control and Scan Control
+### State Machine Framework
 
 Two Classes:
 1. State
