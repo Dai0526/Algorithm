@@ -89,3 +89,47 @@ Thus, Assembly language for vector computing, basic calculations for 8 floats(25
 
 ### Montion Control and Scan Control
 #### State Machine Framework
+
+Two Classes:
+1. State
+    - member variable:
+        - uid<id, name>: state_name
+        - uid<id, name>: prev_state_name
+        - map<int, int>: transitions
+        - timeout
+        - during
+        - enterByTimeout
+        - enterByException
+    - functions:
+        - public:
+            - int TriggerEvent: tell statemachine to transition
+            - void AddTransition
+            - GetPreviousState
+        - private
+            - set timeout
+            - start: called when entering the state
+            - stop: called leaving the state
+            - processing: called periodicity when state is current state
+
+2. State Machine
+    - variable
+        - map<int, statePtr>: all states
+        - statePtr: current state
+        - statePtr: prevState
+        - int: most recent event id
+        - bool: need transition
+        - int: next state
+        - Thread: state machine thread
+        - int: default state
+        - set<int>: destination - all event destinations, used to validate transitions.
+        - bool: auto call process
+        - thread interval
+        - bool: isExit
+        - mutex, contitionalVariable
+    - function:
+        - Start(startState, defaultState): first state, if error occur, go to default
+        - Stop: Stop thread and build machine
+        - AddState: Add StatePtr
+        - Add Transition(int oriState, int eventName, int DestState)
+        - TriggerEvent(int eventName)
+        - void Process: check tmeout and call currentState's processing function
