@@ -67,7 +67,10 @@ A common interface for client and server. Data is text based, which is `unsigned
     2. PIDL compiler in linux https://linux.die.net/man/1/pidl
 
 #### Checkstall to monitor CPU usages
-
+* CheckStall
+    * Outer program monitor each threads processing time
+        * a thread to check regularly
+    * internal timer to monitor processing time, if last check equal to current processing time, then the thread is stalled.
 
 ## High Performance Data Computing
 HPC for image and signal processing
@@ -75,7 +78,37 @@ HPC for image and signal processing
 
 #### CUDA
 * Cuda library wrapper
-* Cuda FFT
+    * device
+        - query device and its performance
+    * hostBuffer
+    * deviceBuffer
+    * function 
+        - get/set functions from module
+        - set shape(blocks, threads) for x, y, z
+        - execute with arguments 
+    * dma 
+        - transfer memory between host and device
+    * texture 
+        - bind data to module
+    * context 
+    * module - load cuda file
+
+##### Cuda FFT
+* Situatio: 
+    * System suspend and report out-of-time for CT256(the most advanced model, which requires processing largest data among all CTs).
+* Diagnose: 
+    * Load a debug version with more logs, and find out it is CuFFT initialization issue. CuFFT library need time to initialize, such as loadng ptx file, prepare memory. A simple image series with 512 * 512 * 100 will require 1 - 2 minutes for warm up. And one warm-up would lasts about half day.
+* Action:
+    * do research through the CUDA community and contact Nvidia engineer about it, it seems a feature for CuFFT to initialize.
+    * We don't need that much additional libraries, thus we decided to implement our own CuFFT library
+    * Implement FFT2, FFT4, FFT8, FFT16, then reuse them to make fft256 and fft512 for general use
+        * as a backwards compatibility, we add a configuration to support all three fft
+            1. ipp
+            2. cufft
+            3. fft
+* Result:
+    * performance is nearly the same as CuFFT, and there is no warmup suspend issue.
+
 
 #### IPP
 Use IPPs verion r2019 update(ipp10).
@@ -88,8 +121,16 @@ Then the idea comes to our mind is that how Ipp works and can we develop one by 
 Thus, Assembly language for vector computing, basic calculations for 8 floats(256 bits) a time. 
 
 ## Data Acquistion 
-### Jungo Driver and WDK  
-
+* Linux Side:
+    1. Worked with Firmware team. 
+        * Define the data packet format and meta header format. 
+        * Collect data from sensor.
+    2. Use Shared Memory
+        - decode data, calibration
+        - parse data to scan parameter, data, header info
+    3. Sent data by Remote Procedure Call
+        - scan init, it will set RPC connection with Windows Main App
+        - scan done, send data, meta to Windows side for reconstruction and post processing.
 
 ## Montion Control and Scan Control
 ### State Machine Framework
