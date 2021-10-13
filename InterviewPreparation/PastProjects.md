@@ -97,7 +97,7 @@ HPC for image and signal processing
 * Situatio: 
     * System suspend and report out-of-time for CT256(the most advanced model, which requires processing largest data among all CTs).
 * Diagnose: 
-    * Load a debug version with more logs, and find out it is CuFFT initialization issue. CuFFT library need time to initialize, such as loadng ptx file, prepare memory. A simple image series with 512 * 512 * 100 will require 1 - 2 minutes for warm up. And one warm-up would lasts about half day.
+    * Load a debug version with more logs, and find out it is CuFFT initialization issue. CuFFT library(plan creation) need time to initialize, such as loadng ptx file, prepare memory. A simple image series with 512 * 512 * 100 will require 1 - 2 minutes for warm up. And one warm-up would lasts about half day.
 * Action:
     * do research through the CUDA community and contact Nvidia engineer about it, it seems a feature for CuFFT to initialize.
     * We don't need that much additional libraries, thus we decided to implement our own CuFFT library
