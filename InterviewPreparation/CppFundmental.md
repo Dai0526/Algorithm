@@ -67,6 +67,9 @@ Is to iterate container's element without exposure its internal structure
     * It can detach itself from its child
     * typically used for long running background services such as server
 
+A mutex only allows you to wait until the lock is available; 
+a condition variable allows you to wait until some application-defined condition has changed.
+
 ### Thread vs Process
 Process:
 * Creation of each process requires separate system calls for each process.

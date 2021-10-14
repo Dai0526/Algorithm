@@ -29,6 +29,11 @@ The architecture itself utlize the computing resources. It makes sure as less id
         * Outer program monitor each threads processing time
             * a thread to check regularly
         * internal timer to monitor processing time, if last check equal to current processing time, then the thread is stalled.
+
+Mutex VS Conditional Variable
+1. A mutex only allows you to wait until the lock is available; 
+2. A condition variable allows you to wait until some application-defined condition has changed.
+
 * Pipe
     * Container class
         * use sync Queue to store meta info
