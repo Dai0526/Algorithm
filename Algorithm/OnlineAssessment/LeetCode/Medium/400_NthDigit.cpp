@@ -1,4 +1,5 @@
 /*
+https://leetcode.com/problems/nth-digit/
 1. A brute force solution is to make a string, then find nth character, time exceed exception
 
 2. Find pattern
