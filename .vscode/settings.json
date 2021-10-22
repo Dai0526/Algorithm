@@ -78,5 +78,7 @@
         "xmemory": "cpp",
         "xstddef": "cpp",
         "xtr1common": "cpp"
-    }
+    },
+    "files.encoding": "utf8bom",
+    "files.autoGuessEncoding": false,
 }
