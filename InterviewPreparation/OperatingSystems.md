@@ -17,7 +17,6 @@ Kernel
 ## C++ Compiler and Bugging Tool
 
 ### C++ Compiler 
-
 * Linux
     * LLVM
     * CLANG
@@ -35,6 +34,11 @@ Kernel
 * MSBuild
 
 ### C++ Debugger
+
+* ThreadSanitizer
+    * multithread data race detector
+        * `g++ -std=c++11 dataRace.cpp -fsanitize=thread pthread -g -o dataRace`
+
 * Windows
     * visual studio debugger - cl compiles debug version with .PDB file. 
     * cuda - Nvidia NSight
