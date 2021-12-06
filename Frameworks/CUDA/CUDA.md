@@ -130,3 +130,109 @@ cudaError_t cudaMallocManaged(void **devPtr, size_t size, unsigned int flag=0);
 // Use cudaDeviceSynchronize() to access correct result in host.
 cudaDeviceSynchronize();
 ```
+
+
+## Heterogeneous Computing
+* Host - CPU
+* Device - GPU
+
+Basic Workflow:  
+1. Copy Data from CPU memory to GPU
+2. Load and Execute GPU program  
+    * Caching data on chip for performance
+4. Copy Result from GPU memory to CPU memory
+
+## GPU software Layers
+Softare Application Layer - cuda interface  
+
+![cuda interface](./assets/gpuApplication.png)
+
+Device Processing Unit - sm  
+Streaming Multi-Processor
+![cuda interface](./assets/sm.png)
+
+Processing Logics:
+`Thread` executed by `Core`  
+`Thread Block` Executed by `Steaming Multirocessor`  
+`Kernel Grid` Executed by Complete `GPU Unit`  
+
+![sm details](./assets/SMDetails.png)
+
+A schematic diagram of the Tesla’s unified GPU architecture is shown in the figure above. It illustrates the framework of a Tesla C2050 device. The device has a total of 448 streaming-processor (SP) cores organized as a group of 32 stream processors (also called CUDA cores), in 14 streaming multiprocessors (SM). Each core here executes a sequential thread in a so-called SIMT (Single Instruction, Multiple Thread) fashion and all the threads in a same wrap execute the same instruction at the same time, where a wrap is a group of 32 threads. Tesla supports up to 32 active warps on each SM. If one warp stalls at any conditional operation, then it selects another ready warp so that the cores can remain active.  
+
+![device memory](./assets/GPUDeviceMemroy.png)  
+Similar to other GPUs, the Tesla device has a hierarchy of on-board memory, such as a small and fast programmable L1 cache/shared memory (16 – 48 KBs), a fully coherent L2 cache memory (512–768 KBs) and a relatively large on-board DRAM or device main memory (3–6 GBs). The L1 cache is attached to each multiprocessor and shared among the comprising cores, where the unified L2 cache is shared across the device. The main task of L2 memory is to minimize the effect of the long latency of device DRAM. There are also some register files (128 KBs), texture and constant caches within each SM. At the software level, all the memory levels are unified into a single continuous address space.
+
+There exist a number of application programming interfaces (API) that can enable programmers to access the device memory and develop GPU-based applications.
+
+
+## Indexing in CUDA
+
+### Thread and Block in 1D
+ * Grid
+    * Block
+        * Thread  
+
+Index = blockIdx.x * blockDim.x + threadIdx.x 
+![index 1d](./assets/index1d.png) 
+
+### Thread and Block in 2D
+
+x = blockIdx.x * blockDim.x + threadIdx.x  
+y = blockIdx.y * blockDim.y + threadIdx.y 
+
+![index 2d](./assets/index2d.png) 
+
+### Grid, Block, Threads and Mem
+```
+blockId = blockIdx.x + blockIdx.y * GridDim.x
+threadId = blockId * (blockDim.x * blockDim.y) + (threadIdx.y*blockDim.x) + threadIdx.x
+
+```
+
+#### N thread and N block
+M threads per Block
+```C++
+int index = threadIdx.x + blockIdx.x * M
+          = threadIdx.x + blockIdx.x * blockDim.x
+
+___global___ void add(int *a, int *b, int *c){
+    int index = threadIdx.x + blockIdx.x * blockDim.x;
+    c[index] = a[index] + b[index];
+}
+
+#define N (2048 * 2048)
+#define THREADS_PER_BLOCK 512
+
+int main(){
+    int *a, *b, *c;
+    int *dA, *dB, *dC;
+    int isze = N * sizeof(int);
+
+    cudaMalloc((void**)&dA, size);
+    cudaMalloc((void**)&dA, size);
+    cudaMalloc((void**)&dA, size);
+
+    a = (int*) malloc(size);
+    random_ints(a, N);
+    b = (int*) malloc(size);
+    random_ints(b, N);
+    c = (int*) malloc(size);
+
+    cudaMemcpy(dA, a, size, cudaMemcpyHostToDevice);
+    cudaMemcpy(dB, b, size, cudaMemcpyHostToDevice);
+
+    add<<<N/THREADS_PER_BLOCK, THREADS_PER_BLOCK>>>(dA, dB, dC);
+    
+    cudaMemcpy(c, dC, size, cudaMemcpyDeviceToHost);
+
+    free(a); free(b); free(c);
+    cudaFree(dA); cudaFree(dB); cudaFree(dC);
+
+    return 0;
+}
+
+
+```
+
+

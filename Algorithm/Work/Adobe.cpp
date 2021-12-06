@@ -43,8 +43,8 @@ class solution{
                 int iRotate = i - n / 2;
                 int jRotate = j - n / 2;
 
-                int i2 = static_cast<int>(cosf(angle) * iRotate - sinf(angle) * jRotate);
-                int j2 = static_cast<int>(sinf(angle) * iRotate + cosf(angle) * jRotate);
+                int i2 = static_cast<int>(round(cosf(angle) * iRotate - sinf(angle) * jRotate)) + n / 2;
+                int j2 = static_cast<int>(round(sinf(angle) * iRotate + cosf(angle) * jRotate)) + n / 2;
 
                 if(i2 < 0 || i2 >= n || j2 < 0 || j2 >= n){
                     continue; // out of bound
