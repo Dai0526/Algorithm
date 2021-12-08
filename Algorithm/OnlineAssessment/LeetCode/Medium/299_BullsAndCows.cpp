@@ -2,6 +2,10 @@
 https://leetcode.com/problems/bulls-and-cows/
 */
 
+#include <unordered_map>
+#include <sstream>
+
+using namespace std;
 class Solution {
 public:
     string getHint(string secret, string guess) {
