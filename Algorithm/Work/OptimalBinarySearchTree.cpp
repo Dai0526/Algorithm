@@ -63,12 +63,6 @@ Thus, we can recursively construct the binary search tree. For example:
 
 */
 
-void recoverTree(const vector<vector<int>>& roots){
-    int n = roots.size();
-    
-
-}
-
 void recoverTreeRec(const vector<vector<int>>& roots, int l, int r, int parent, bool isLeft){
 
     string branch = isLeft ? "left" : "right";
