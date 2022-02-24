@@ -76,7 +76,7 @@ void recoverTreeRec(const vector<vector<int>>& roots, int l, int r, int parent, 
     if(l > r){
         // is a dummy node
         int dummyCount = isLeft ? parent - 1 : parent;
-        cout << "d" << dummyCount << " is the " << branch << " of k" << parent << endl;
+        cout << "d" << dummyCount << " is the " << branch << " child of k" << parent << endl;
         return;
     }
 
@@ -90,7 +90,7 @@ void recoverTreeRec(const vector<vector<int>>& roots, int l, int r, int parent, 
         cout << "k" << key << " is the root" << endl;
     }else{
         // case 2, child
-        cout << "k" << key << " is the " << branch << " child of " << "k" << parent << endl;
+        cout << "k" << key << " is the " << branch << " child of k" << parent << endl;
     }
 
     // find left
