@@ -14,8 +14,9 @@ int coinExchange(const vector<int>& coins, int val){
             if(i >= coins[j]){
                 minCount = min(minCount, 1 + lut[i - coins[j]]);
                 cout << "i = " << i << ", j = " << j << ", min = " << minCount << endl;
-                lut[i] = minCount;
+                
             }
+            lut[i] = minCount;
         }   
     }
 
