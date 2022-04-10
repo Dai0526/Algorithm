@@ -77,7 +77,8 @@
         "xloctime": "cpp",
         "xmemory": "cpp",
         "xstddef": "cpp",
-        "xtr1common": "cpp"
+        "xtr1common": "cpp",
+        "random": "cpp"
     },
     "files.encoding": "utf8bom",
     "files.autoGuessEncoding": false,

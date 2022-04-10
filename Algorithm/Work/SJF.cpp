@@ -4,7 +4,7 @@
 #include <exception>
 #include <queue>
 #include <map>
-
+#include <algorithm>
 using namespace std;
 
 struct Process{
@@ -30,12 +30,12 @@ struct Process{
 };
 
 struct RunEntity{
-    string pName;
-    int tBurst;
-    int tReady;
+    string pName = "";
+    int tBurst = 0;
+    int tReady = 0;
 
-    int tDispatched;
-    int tComplete;
+    int tDispatched = 0;
+    int tComplete = 0;
 
     RunEntity(){};
 
@@ -93,7 +93,7 @@ unordered_map<string, RunStat> RunSJFSchduling(vector<Process*> procs){
 
     // sort by arrival time
     auto compArrival = []( Process* a, const Process* b ) { return a->tArrival < b->tArrival; };
-    sort(procs.begin(), procs.end(), compArrival);
+    std::sort(procs.begin(), procs.end(), compArrival);
 
     unordered_map<string, Process*> records; // ordered map by arrival time
     queue<string> arrivalQueue;
@@ -106,7 +106,7 @@ unordered_map<string, RunStat> RunSJFSchduling(vector<Process*> procs){
         result[procName] = RunStat(procName, p->tArrival);
     }      
 
-    auto compBurst = [] (const RunEntity& a, const RunEntity& b) { return a.tBurst < b.tBurst; };
+    auto compBurst = [] (const RunEntity& a, const RunEntity& b) { return a.tBurst > b.tBurst; };
     priority_queue<RunEntity, vector<RunEntity>, decltype(compBurst)> readyQueue(compBurst);  
     
     //RunEntity running;
@@ -119,7 +119,6 @@ unordered_map<string, RunStat> RunSJFSchduling(vector<Process*> procs){
     while(!isCompleted){
         std::cout << "[Debug] - CPU Time = " << tCPU << std::endl;
         std::cout << "\t[Debug] - Arrival Queue Size =  " << arrivalQueue.size() << std::endl;
-        std::cout << "\t[Debug] - next Arrival Item =  " << arrivalQueue.front() << std::endl;
         std::cout << "\t[Debug] - ReadyQueue Size =  " << readyQueue.size() << std::endl;
         if(pRunning != nullptr){
             std::cout << "\t[Debug] - Current Running =  " << pRunning->pName << std::endl;
@@ -129,7 +128,6 @@ unordered_map<string, RunStat> RunSJFSchduling(vector<Process*> procs){
 
         // check if there is new proc coming
         if(!arrivalQueue.empty() && records[arrivalQueue.front()]->tArrival == tCPU){
-            std::cout << "\t[Debug] - Start Check arrival Queue " << std::endl;
             string arrivalName = arrivalQueue.front();
             arrivalQueue.pop();
 
@@ -137,35 +135,49 @@ unordered_map<string, RunStat> RunSJFSchduling(vector<Process*> procs){
             int tBurst = arrivalProc->getNextBurst();
 
             RunEntity candidate(arrivalName, tBurst, tCPU);
-            readyQueue.push(candidate);     
-            std::cout << "\t[Debug] - End Check arrival Queue " << std::endl;
+            std::cout << "\t[Debug] - New RE Created by Arrival" << candidate.pName << std::endl;
+            std::cout << "\t\t[Debug] - Burst : " << candidate.tBurst << std::endl;
+            std::cout << "\t\t[Debug] - Ready : " << candidate.tReady << std::endl;
+            std::cout << "\t\t[Debug] - Dispa : " << candidate.tDispatched << std::endl;
+            std::cout << "\t\t[Debug] - Compl : " << candidate.tComplete << std::endl;
+            readyQueue.push(candidate);
+            std::cout << "\t[Debug] - ReadyQueue Top " << readyQueue.top().pName << std::endl;
+            std::cout << "\t\t[Debug] - Burst : " << readyQueue.top().tBurst << std::endl;
+            std::cout << "\t\t[Debug] - Ready : " << readyQueue.top().tReady << std::endl;
+            std::cout << "\t\t[Debug] - Dispa : " << readyQueue.top().tDispatched << std::endl;
+            std::cout << "\t\t[Debug] - Compl : " << readyQueue.top().tComplete << std::endl;
         }
 
         // Handle current running entity which is finsih running
         if(pRunning != nullptr && pRunning->tComplete <= tCPU){
-            std::cout << "\t[Debug] - Start Check running proc " << std::endl;
             string procName = pRunning->pName;
             Process* proc = records[procName];
-            std::cout << "\t\t[Debug] - procName = " << procName << std::endl;    
+            std::cout << "\t[Debug] - Current Running Proc " << procName << std::endl;
             if(proc->hasNextBurst()){
                 std::cout << "\t\t[Debug] - has next burst " << std::endl;
                 RunEntity candidate(procName, proc->getNextBurst(), tCPU);
+                std::cout << "\t\t[Debug] - New RE Created by nextburst " << candidate.pName << std::endl;
+                std::cout << "\t\t\t[Debug] - Burst : " << candidate.tBurst << std::endl;
+                std::cout << "\t\t\t[Debug] - Ready : " << candidate.tReady << std::endl;
+                std::cout << "\t\t\t[Debug] - Dispa : " << candidate.tDispatched << std::endl;
+                std::cout << "\t\t\t[Debug] - Compl : " << candidate.tComplete << std::endl;
                 readyQueue.push(candidate);     
             }else{
                 // if it is done, set completion time
-                std::cout << "\t\t[Debug] - not next burst " << std::endl;
+                std::cout << "\t\t[Debug] - no next burst, proc finished " << std::endl;
                 result[procName].tCompletion = tCPU; //pRunning->tComplete;
+                std::cout << "\t\t[Debug] - Completion " << result[procName].tCompletion<< std::endl;
                 result[procName].tTurnAround = result[procName].tCompletion - result[procName].tArrival;
+                std::cout << "\t\t[Debug] - tArrival " << result[procName].tArrival<< std::endl;
+                std::cout << "\t\t[Debug] - Turnaround " << result[procName].tTurnAround<< std::endl;
             }
 
             // accumlate wait time
-            std::cout << "\t[Debug] - Get Waiting Time " << std::endl;
             result[procName].tWaiting += (pRunning->tDispatched - pRunning->tReady);
+            std::cout << "\t\t[Debug] - Waiting Time " << result[procName].tWaiting << std::endl;
 
-            std::cout << "\t[Debug] - Set Current Running to Null  " << std::endl;
             delete pRunning;
             pRunning = nullptr;
-            std::cout << "\t[Debug] - End Check running proc " << std::endl;
         }
 
         // if there is still a running entity, continue(no need to check readyQueue)
@@ -177,7 +189,6 @@ unordered_map<string, RunStat> RunSJFSchduling(vector<Process*> procs){
 
         // current running entity is done, dispatch next one from ReadyQueue
         if(!readyQueue.empty()){
-            std::cout << "\t[Debug] - Start Add new running from Ready Queue " << std::endl;
             RunEntity re = readyQueue.top();
             readyQueue.pop();
 
@@ -186,7 +197,11 @@ unordered_map<string, RunStat> RunSJFSchduling(vector<Process*> procs){
 
             pRunning = new RunEntity(re.pName, re.tBurst, re.tReady);
             pRunning->setDispatchTime(tCPU);
-            std::cout << "\t[Debug] - End Add new running from Ready Queue " << std::endl;
+            std::cout << "\t[Debug] - No running RE, Add new from ReadyQueue " << pRunning->pName<< std::endl;
+            std::cout << "\t\t[Debug] - Burst : " << pRunning->tBurst << std::endl;
+            std::cout << "\t\t[Debug] - Ready : " << pRunning->tReady << std::endl;
+            std::cout << "\t\t[Debug] - Dispa : " << pRunning->tDispatched << std::endl;
+            std::cout << "\t\t[Debug] - Compl : " << pRunning->tComplete << std::endl;
         } 
 
         ++tCPU;
@@ -233,15 +248,15 @@ void ParseStat(unordered_map<string, RunStat> result){
 
 int main(int argc, char* argv[]){
     // create input processes info
-    // Process procA("A", 0, {4, 4, 4});
-    // Process procB("B", 2, {8, 8});
-    // Process procC("C", 3, {2, 2});
-    // Process procD("D", 7, {1, 1, 1});
+    Process procA("A", 0, {4, 4, 4});
+    Process procB("B", 2, {8, 8});
+    Process procC("C", 3, {2, 2});
+    Process procD("D", 7, {1, 1, 1});
 
-    Process procA("A", 0, {7});
-    Process procB("B", 2, {4});
-    Process procC("C", 4, {1});
-    Process procD("D", 5, {4});
+    // Process procA("A", 0, {7});
+    // Process procB("B", 2, {4});
+    // Process procC("C", 4, {1});
+    // Process procD("D", 5, {4});
 
     vector<Process*> procVec { &procA, &procB, &procC, &procD };
 
