@@ -131,7 +131,17 @@ unordered_map<string, RunStat> RunSJFSchduling(vector<Process*> procs){
     int tCPU = 0;
     bool isCompleted = false;
 
+    std::cout << "[Debug] - Ready to Run" << std::endl;
+
     while(!isCompleted){
+        std::cout << "[Debug] - CPU Time = " << tCPU << std::endl;
+        std::cout << "\t[Debug] - Arrival Queue Size =  " << arrivalQueue.size() << std::endl;
+        std::cout << "\t[Debug] - ReadyQueue Size =  " << readyQueue.size() << std::endl;
+        if(pRunning != nullptr){
+            std::cout << "\t[Debug] - Current Running =  " << pRunning->pName << std::endl;
+        }else{
+            std::cout << "\t[Debug] - No Current Running" << std::endl;
+        }
 
         // check if there is new proc coming
         if(!arrivalQueue.empty() && records[arrivalQueue.front()]->tArrival == tCPU){
@@ -142,25 +152,46 @@ unordered_map<string, RunStat> RunSJFSchduling(vector<Process*> procs){
             int tBurst = arrivalProc->getNextBurst();
 
             RunEntity candidate(arrivalName, tBurst, tCPU);
+            std::cout << "\t[Debug] - New RE Created by Arrival" << candidate.pName << std::endl;
+            std::cout << "\t\t[Debug] - Burst : " << candidate.tBurst << std::endl;
+            std::cout << "\t\t[Debug] - Ready : " << candidate.tReady << std::endl;
+            std::cout << "\t\t[Debug] - Dispa : " << candidate.tDispatched << std::endl;
+            std::cout << "\t\t[Debug] - Compl : " << candidate.tComplete << std::endl;
             readyQueue.push(candidate);
+            std::cout << "\t[Debug] - ReadyQueue Top " << readyQueue.top().pName << std::endl;
+            std::cout << "\t\t[Debug] - Burst : " << readyQueue.top().tBurst << std::endl;
+            std::cout << "\t\t[Debug] - Ready : " << readyQueue.top().tReady << std::endl;
+            std::cout << "\t\t[Debug] - Dispa : " << readyQueue.top().tDispatched << std::endl;
+            std::cout << "\t\t[Debug] - Compl : " << readyQueue.top().tComplete << std::endl;
         }
 
         // Handle current running entity which is finsih running
         if(pRunning != nullptr && pRunning->tComplete <= tCPU){
             string procName = pRunning->pName;
             Process* proc = records[procName];
-
+            std::cout << "\t[Debug] - Current Running Proc " << procName << std::endl;
             if(proc->hasNextBurst()){
+                std::cout << "\t\t[Debug] - has next burst " << std::endl;
                 RunEntity candidate(procName, proc->getNextBurst(), tCPU);
+                std::cout << "\t\t[Debug] - New RE Created by nextburst " << candidate.pName << std::endl;
+                std::cout << "\t\t\t[Debug] - Burst : " << candidate.tBurst << std::endl;
+                std::cout << "\t\t\t[Debug] - Ready : " << candidate.tReady << std::endl;
+                std::cout << "\t\t\t[Debug] - Dispa : " << candidate.tDispatched << std::endl;
+                std::cout << "\t\t\t[Debug] - Compl : " << candidate.tComplete << std::endl;
                 readyQueue.push(candidate);     
             }else{
                 // if it is done, set completion time
+                std::cout << "\t\t[Debug] - no next burst, proc finished " << std::endl;
                 result[procName].tCompletion = pRunning->tComplete;
+                std::cout << "\t\t[Debug] - Completion " << result[procName].tCompletion<< std::endl;
                 result[procName].tTurnAround = result[procName].tCompletion - result[procName].tArrival;
+                std::cout << "\t\t[Debug] - tArrival " << result[procName].tArrival<< std::endl;
+                std::cout << "\t\t[Debug] - Turnaround " << result[procName].tTurnAround<< std::endl;
             }
 
             // accumlate wait time
             result[procName].tWaiting += (pRunning->tDispatched - pRunning->tReady);
+            std::cout << "\t\t[Debug] - Waiting Time " << result[procName].tWaiting << std::endl;
 
             delete pRunning;
             pRunning = nullptr;
@@ -169,6 +200,7 @@ unordered_map<string, RunStat> RunSJFSchduling(vector<Process*> procs){
         // if there is still a running entity, continue(no need to check readyQueue)
         if(pRunning != nullptr){
             ++tCPU;
+            std::cout << "\t[Debug] - Still Running Entity, Continue " << std::endl;
             continue;
         }
 
@@ -182,6 +214,11 @@ unordered_map<string, RunStat> RunSJFSchduling(vector<Process*> procs){
 
             pRunning = new RunEntity(re.pName, re.tBurst, re.tReady);
             pRunning->setDispatchTime(tCPU);
+            std::cout << "\t[Debug] - No running RE, Add new from ReadyQueue " << pRunning->pName<< std::endl;
+            std::cout << "\t\t[Debug] - Burst : " << pRunning->tBurst << std::endl;
+            std::cout << "\t\t[Debug] - Ready : " << pRunning->tReady << std::endl;
+            std::cout << "\t\t[Debug] - Dispa : " << pRunning->tDispatched << std::endl;
+            std::cout << "\t\t[Debug] - Compl : " << pRunning->tComplete << std::endl;
         } 
 
         ++tCPU;
@@ -232,6 +269,7 @@ void ParseStat(unordered_map<string, RunStat> result){
 Test for single burst
 */
 void Test1(){
+
     std::cout << "Run Test1" << endl;
     Process procA("A", 0, {7});
     Process procB("B", 2, {4});
@@ -248,6 +286,7 @@ void Test1(){
 Test for multiple bursts
 */
 void Test2(){
+    
     std::cout << "Run Test2" << endl;
     Process procA("A", 0, {4, 4, 4});
     Process procB("B", 2, {8, 8});
