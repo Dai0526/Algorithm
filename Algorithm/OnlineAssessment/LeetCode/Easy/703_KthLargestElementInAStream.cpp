@@ -28,7 +28,7 @@ public:
     
 private:
     int cap;
-    priority_queue<int, vector<int>, greater<int>> pq;
+    <int, vector<int>, greater<int>> pq;
 };
 
 /**
