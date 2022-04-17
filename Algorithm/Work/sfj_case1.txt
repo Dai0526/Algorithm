@@ -1,0 +1,4 @@
+﻿    Process procA("A", 0, {4, 4, 4});
+    Process procB("B", 2, {8, 8});
+    Process procC("C", 3, {2, 2});
+    Process procD("D", 7, {1, 1, 1});

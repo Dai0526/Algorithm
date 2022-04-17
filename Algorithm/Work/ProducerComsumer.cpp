@@ -31,7 +31,6 @@ using namespace std;
 Helper function
     - string getTimestamp()
     - void sleep(int ms)
-
 */
 std::string getTimestamp()
 {
@@ -49,49 +48,57 @@ void sleep(int ms){
 
 
 /*
-Just for demo. Not a good practice to use global variable in general.
+Just for demo. 
+Not a good practice to use global variable in general.
 */
 mutex gMtx;
-condition_variable cv;
-queue<string> jobQueue;
-atomic<bool> isJobsDone = false;
+condition_variable gCv;
+queue<string> gJobs;
+
+atomic<int> gJobCount = 0;
+atomic<bool> gIsDone = false;
 
 
 void consumerFunc(const string& name){  
 
-    while(!isJobsDone){
+    while(true){
         std::unique_lock ul(gMtx);
-        while(jobQueue.empty()){
-            cv.wait(ul);
+        while(gJobs.empty()){
+            gCv.wait(ul);
         }
 
-        string job = jobQueue.front();
+        string job = gJobs.front();
         cout << name << " is handling job: " << job << endl;
-        jobQueue.pop();
+        gJobs.pop();
         ul.unlock();
 
         sleep(100);
     }
+
+    cout << name << " Exit." << endl;
 }
 
-void producerFunc(int jobAmount){
+void producerFunc(const string& proName, int jobAmount){
     int count = 0;
 
-    while(!isJobsDone){ // produce 20 jobs
-        // dummy exection
-        stringstream ss;
-        ss << "Hello World " << count << " @ " << getTimestamp() << endl;
-        string currJob = ss.str();
-        
-        mtx.lock(); // not the best practice, better use lock guard for bettern exception handling.
-        jobQueue.push(currJob);
-        cv.notify_all();
-        mtx.unlock();
+    while(!gIsDone){ // produce 20 jobs
 
+        gMtx.lock(); // not the best practice, better use lock guard for bettern exception handling.
+        stringstream ss;
+        ss << "Hello World " << gJobCount << " @ " << getTimestamp() << endl;
+        string currJob = ss.str();
+        gJobs.push(currJob);
+        gCv.notify_all();
+        gMtx.unlock();
+
+        ++gJobCount;
         ++count;
-        isJobsDone = (count == jobAmount ? true : false);
-        sleep(100);
+        gIsDone = (count == jobAmount ? true : false);
+
+        sleep(50);
     }
+
+    cout << "Producer " << proName << " Exit." << endl;
 }
 
 
@@ -99,12 +106,14 @@ void producerFunc(int jobAmount){
 void runDemo(){
 
     // demo using 3 consumer thread, 1 producer
-    thread prodThread(producerFunc, 20);
+    thread prod1Thread(producerFunc, "Pro1", 10);
+    //thread prod2Thread(producerFunc, "Pro2", 5);
     thread consumer1(consumerFunc, "John");
     thread consumer2(consumerFunc, "Tom");
     thread consumer3(consumerFunc, "Jerry");
 
-    prodThread.join();
+    prod1Thread.join();
+    //prod2Thread.join();
     consumer1.join();
     consumer2.join();
     consumer3.join();
