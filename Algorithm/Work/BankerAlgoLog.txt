@@ -1,0 +1,62 @@
+Start Test
+Available Resource: [0 1 0 2 1 ]
+
+Total Resource: [2 4 1 4 4 ]
+
+Current Resource: 0 1 1 1 2 
+0 1 0 1 0 
+0 0 0 0 1 
+2 1 0 0 0 
+
+Required Resource: 1 1 0 2 1 
+0 1 0 2 1 
+0 2 0 3 1 
+0 2 1 1 0 
+
+Round - 1
+	Check Client #0
+		Requesting 1 unit(s) of RS0
+			[Failed] not enough available resource RS0
+		Push back Client #0 for next round
+	Check Client #1
+		Already has enough RS0, no request
+		Already has enough RS1, no request
+		Already has enough RS2, no request
+		Requesting 1 unit(s) of RS3
+		Requesting 1 unit(s) of RS4
+			[Success]
+		Client 1 finished and released his resources.
+	Check Client #2
+		Already has enough RS0, no request
+		Requesting 2 unit(s) of RS1
+		Already has enough RS2, no request
+		Requesting 3 unit(s) of RS3
+		Already has enough RS4, no request
+			[Success]
+		Client 2 finished and released his resources.
+	Check Client #3
+		Already has enough RS0, no request
+		Requesting 1 unit(s) of RS1
+		Requesting 1 unit(s) of RS2
+			[Failed] not enough available resource RS2
+		Push back Client #3 for next round
+	Initial Clients number = 4, Remainning Clients = 2
+	2 Clients got the resource and Released. SAFE for now.
+
+Round - 2
+	Check Client #0
+		Requesting 1 unit(s) of RS0
+			[Failed] not enough available resource RS0
+		Push back Client #0 for next round
+	Check Client #3
+		Already has enough RS0, no request
+		Requesting 1 unit(s) of RS1
+		Requesting 1 unit(s) of RS2
+			[Failed] not enough available resource RS2
+		Push back Client #3 for next round
+	Initial Clients number = 2, Remainning Clients = 2
+	No progress was made(Deadlock happends). In a UNSAFE state.
+
+[UNSAFE] - The initial state is unsafe, and the following Clients are blocked:
+	Client #0
+	Client #3

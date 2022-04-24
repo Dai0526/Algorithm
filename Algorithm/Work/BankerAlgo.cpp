@@ -39,23 +39,20 @@ string getMatStr(const vector<vector<int>>& mat){
 class MyLog{
     public:
         MyLog(const string& fullpath): m_fullPath(fullpath) {
-            m_logfs.open(m_fullPath);
+            m_logfs.open(fullpath);
         }
 
         ~MyLog(){
             m_logfs.close();
         }
 
-        template<typename T> 
-        MyLog& operator<< (const T& data) 
-        {
-            m_logfs << data;
-            cout << data;
-            return *this;
-        }
+        void Write(const string& s){
+            cout << s << endl;
+            m_logfs << s << endl;
+        }    
 
     private:
-        string m_fullPath = "";
+        string m_fullPath;
         ofstream m_logfs;
 };
 
@@ -68,37 +65,39 @@ class MyLog{
         In the end, if queue becomes empty, means all process can be released, it is safe.
 */
 bool Bankers(vector<int> avil, vector<int> total, vector<vector<int>> curr, vector<vector<int>> maxReq){
+    // start logging and log input data
+    MyLog logger(".//BankerAlgoLog.txt");
+    logger.Write("Start Test");
+    logger.Write("Available Resource: " + getVecStr(avil));
+    logger.Write("Total Resource: " + getVecStr(total));
+    logger.Write("Current Resource: " + getMatStr(curr));
+    logger.Write("Required Resource: " + getMatStr(maxReq));
     
-    MyLog logging(".//BankerAlgoLog.txt");
-    logging << "Start Test" << endl;
-    logging << "Available Resource: " << getVecStr(avil);
-    logging << "Total Resource: " << getVecStr(total);
-    logging << "Current Resource: " << getMatStr(curr);
-    logging << "Required Resource: " << getMatStr(maxReq);
-    
-    int nProc = maxReq.size();        // proc count
+    int nProc = maxReq.size();        // proc count - to check progress
     int nResource = maxReq[0].size(); // resource count
 
-    queue<int> pids; 
+    queue<int> pids;  // a client queue to check
     for(int p = 0; p < nProc; ++p){
         pids.push(p);
     }
 
     bool isSafe = true;
     int nRound = 1;
+
+    // use BFS method to check each client
     while(!pids.empty()){
-        //cout << "Round - " << nRound << endl;
-        logging << "Round - " << nRound;
+        logger.Write("Round - " + to_string(nRound));
 
         int qSize = pids.size();
         for(int i = 0; i < qSize; ++i){
             // pop one client from queue to check
             int currPid = pids.front();
             pids.pop();
-            //cout << "\tCheck Client # " << currPid << endl;
-            logging << "\tCheck Client # " << currPid;
 
-            int* pCurrProcRes = curr[currPid].data(); // use ptr to avoid making copy of vec
+            logger.Write("\tCheck Client #" + to_string(currPid));
+
+            // use ptr to avoid making copy of vec
+            int* pCurrProcRes = curr[currPid].data(); 
             int* pCurrProcMax = maxReq[currPid].data();
 
             // start check each resources for this client
@@ -107,82 +106,69 @@ bool Bankers(vector<int> avil, vector<int> total, vector<vector<int>> curr, vect
                 int resGap = pCurrProcMax[r] - pCurrProcRes[r];
 
                 if(resGap <= 0){
-                    //cout << "\t\tAlready has enough RS" << r << ", no request" << endl;
-                    logging << "\t\tAlready has enough RS" << r << ", no request";
+                    logger.Write("\t\tAlready has enough RS" + to_string(r) + ", no request");
                     continue;
                 }
 
-                //cout << "\t\tRequesting " << resGap << " unit(s) of RS" << r << endl;
-                logging << "\t\tRequesting " << resGap << " unit(s) of RS" << r;
+                logger.Write("\t\tRequesting " + to_string(resGap) + " unit(s) of RS" + to_string(r));
                 if(resGap > avil[r]){
                     // report unsafe
-                    //cout << "\t\t\t[Failed] not enough available resource RS" << r << endl;
-                    logging << "\t\t\t[Failed] not enough available resource RS" << r;
-                    
-                    // add proc back to queue for next rounds check
+                    logger.Write("\t\t\t[Failed] not enough available resource RS" + to_string(r));
                     isSafe = false;
                     break;
                 }
-                //cout << "\t\t\t[Success]" << endl;
-                logging << "\t\t\t[Success]";
             }
 
+            // process result
             if(!isSafe){
+                // if unsafe, then push back current client
                 pids.push(currPid);
-                //cout << "\t\tPush back Client #" << currPid << " for next round"<< endl;
-                logging << "\t\tPush back Client #" << currPid << " for next round";
+                logger.Write("\t\tPush back Client #" + to_string(currPid) + " for next round");
             }else{
-                // release the resource that curr Pid owned
+                // if safe, release the resource that curr Pid owned, and decrease client count
                 for(int r = 0; r < nResource; ++r){
                     avil[r] += pCurrProcRes[r];
                 }
                 --nProc;  // reduce current process count
-                //cout << "\t\tClient " << currPid << " finished and released his resources." << endl;
-                logging << "\t\tClient " << currPid << " finished and released his resources.";
-            } // if - check safe
+
+                logger.Write("\t\t\t[Success]");
+                logger.Write("\t\tClient " + to_string(currPid) + " finished and released his resources.");
+            }
         }
 
         ++nRound;
+
         // check if it makes any progress
-        //cout << "\tInitial Clients number = " << qSize << ", Remainning Clients = " << nProc << endl;
-        logging << "\tInitial Clients number = " << qSize << ", Remainning Clients = " << nProc;
+        logger.Write("\tInitial Clients number = " + to_string(qSize) + ", Remainning Clients = " + to_string(nProc));
+        
         if(qSize == nProc){
-            //cout << "\tNo progress was made(Deadlock happends). In a UNSAFE state.\r\n" << endl;
-            logging << "\tNo progress was made(Deadlock happends). In a UNSAFE state.\r\n";
+            logger.Write("\tNo progress was made(Deadlock happends). In a UNSAFE state.\r\n");
             isSafe = false;
             break; //break while check
         }
 
-        //cout << "\t" << qSize - nProc << " Clients got the resource and Released. SAFE for now.\r\n" << endl;
-        logging << "\t" << qSize - nProc << " Clients got the resource and Released. SAFE for now.\r\n";
-
+        logger.Write("\t" + to_string(qSize - nProc) + " Clients got the resource and Released. SAFE for now.\r\n");
     }
 
     //check result
     if(isSafe){
-        //cout << "[SAFE] - The initial state is safe to release all clients." << endl;
-        logging << "[SAFE] - The initial state is safe to release all clients.";
+        logger.Write("[SAFE] - The initial state is safe to release all clients.");
     }else{
-        //cout << "[UNSAFE] - The initial state is unsafe, and the following Clients are blocked:" << endl;
-        logging << "[UNSAFE] - The initial state is unsafe, and the following Clients are blocked:";
+        logger.Write("[UNSAFE] - The initial state is unsafe, and the following Clients are blocked:");
         int nRemain = pids.size();
         for(int i = 0; i < nRemain; ++i){
             int clnt = pids.front();
             pids.pop();
-            //cout << "\tClient #" << clnt << endl; 
-            logging << "\tClient #" << clnt; 
+            logger.Write("\tClient #" + to_string(clnt)); 
         }
     }
 
     return isSafe;
 }
 
-
-
-
+// Use Assignment 3 - Ques 2 as a test case
 int test(){
-    
-    // Use Assignment 3 - Ques 2 as a test case
+
     vector<int> avilResource = { 0, 1, 0, 2, 1 };   // [0, 1, 0, 2, 1]
     vector<int> existResource = { 2, 4, 1, 4, 4 };  // [2, 4, 1, 4, 4]
 
@@ -197,8 +183,6 @@ int test(){
     currAllocation.push_back({0, 1, 0, 1, 0});
     currAllocation.push_back({0, 0, 0, 0, 1});
     currAllocation.push_back({2, 1, 0, 0, 0});
-
-
 
     Bankers(avilResource, existResource, currAllocation, maxRequest);
 
